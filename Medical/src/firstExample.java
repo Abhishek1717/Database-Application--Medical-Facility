@@ -9,19 +9,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-/**
- *
- * @author Isha
- */
-// Acknowledgments: This example is a modification of code provided 
-// by Dimitri Rakitine.
-
-// Usage from command line on key.csc.ncsu.edu: 
-// see instructions in FAQ
-// Website for Oracle setup at NCSU : http://www.csc.ncsu.edu/techsupport/technotes/oracle.php
-
-//Note: If you run the program more than once, it will not be able to create the COFFEES table anew after the first run; 
-//	you can remove the COFFEES tables between the runs by typing "drop table COFFEES;" in SQL*Plus.
 
 public class firstExample {
 
