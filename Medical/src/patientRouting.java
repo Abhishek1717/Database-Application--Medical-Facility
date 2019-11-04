@@ -18,8 +18,9 @@ public class patientRouting {
 		List<String> fac= new ArrayList<String>();
 		while(rs.next()) {
 			String x=rs.getString("NAME");
-			System.out.println(i+" "+x) ;
+			System.out.println(i + " " + x) ;
 			fac.add(x);
+			i++;
 			
 			
 		}

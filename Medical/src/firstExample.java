@@ -54,7 +54,13 @@ public class firstExample {
 				DemoQueries dm= new DemoQueries();
 			}
 			else if(Home==4) {
-				break;
+				
+				close(rs);
+                close(stmt);
+                close(conn);
+				System.out.println("Closing Connections...");
+				System.out.println("Closing Application...");
+				System.exit(0);
 			}
 			else {
 				System.out.println("Please enter a valid choice");
