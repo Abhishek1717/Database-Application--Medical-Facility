@@ -1,14 +1,9 @@
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-//package javaapplication5;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Scanner;
 
 public class firstExample {
 
@@ -38,36 +33,33 @@ public class firstExample {
 		// DriverManager list that recognizes the URL jdbcURL
 
 		conn = DriverManager.getConnection(jdbcURL, user, passwd);
-
-		// Create a statement object that will be sending your
-		// SQL statements to the DBMS
-
-		stmt = conn.createStatement();
-
-		// Create the COFFEES table
-
-		/*stmt.executeUpdate("CREATE TABLE COFFEES1 " +
-			   "(COF_NAME VARCHAR(32), SUP_ID INTEGER, " +
-			   "PRICE FLOAT, SALES INTEGER, TOTAL INTEGER)");
-
-		// Populate the COFFEES table
-
-	/*	stmt.executeUpdate("INSERT INTO COFFEES1 " +
-			   "VALUES ('Colombian', 101, 7.99, 0, 0)");
-
-		stmt.executeUpdate("INSERT INTO COFFEES1 " +
-			   "VALUES ('French_Roast', 49, 8.99, 0, 0)");
-
-		stmt.executeUpdate("INSERT INTO COFFEES1 " +
-			   "VALUES ('Espresso', 150, 9.99, 0, 0)");
-
-		stmt.executeUpdate("INSERT INTO COFFEES1 " +
-			   "VALUES ('Colombian_Decaf', 101, 8.99, 0, 0)");
-
-		stmt.executeUpdate("INSERT INTO COFFEES1 " +
-			   "VALUES ('French_Roast_Decaf', 49, 9.99, 0, 0)");*/
-
-		// Get data from the COFFEES table
+		stmt=conn.createStatement();
+		while(true) {
+			System.out.println("1--->Sign In");
+			System.out.println("2--->Sign Up");
+			System.out.println("3--->Demo Queries");
+			System.out.println("4--->Exit");
+			int j;
+			Scanner sc=new Scanner(System.in);
+			int Home=sc.nextInt();
+			if(Home==1) {
+				SignIn sin= new SignIn();
+				}
+			else if(Home==2) {
+				SignUp siup=new SignUp();
+				siup.Proceed(conn);
+				System.out.println("Back to home");
+			}
+			else if(Home==3) {
+				DemoQueries dm= new DemoQueries();
+			}
+			else if(Home==4) {
+				break;
+			}
+			else {
+				System.out.println("Please enter a valid choice");
+			}
+		}
 
 		rs = stmt.executeQuery("SELECT name FROM MEDICAL_FACILITY");
 
@@ -108,5 +100,4 @@ public class firstExample {
         }
     }
 }
-
 
