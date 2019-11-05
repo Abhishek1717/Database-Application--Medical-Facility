@@ -6,7 +6,7 @@ public class patientSymptomMeta {
 	Connection conn;
 	
 	String bpCode;
-	float duration;
+	int duration;
 	boolean recurring;
 	int severity;
 	String incident;
@@ -18,13 +18,15 @@ public class patientSymptomMeta {
 	}
 	
 	public void showAllOptions() throws SQLException {
+		
+		Scanner input = new Scanner(System.in);
+		
 		System.out.println("1. Body Part");
 		System.out.println("2. Duration");
-		System.out.println("3. Is it a reoccurence?");
+		System.out.println("3. Is it a reoccurence? (Y/n)");
 		System.out.println("4. Severity");
 		System.out.println("5. Incident");
 		
-		Scanner input = new Scanner(System.in);
 		System.out.println("Enter your choice to fill : ");
 		int choice = input.nextInt();
 		input.close();

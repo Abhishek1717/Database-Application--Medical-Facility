@@ -10,7 +10,9 @@ public class patientCheckIn {
 		System.out.println("This is the Patient Check-In page.");
 		this.conn = con;
 	}
-	public void symptomMenu() throws SQLException {
+	public void symptomMenu() throws SQLException { //this is being used in addAssessmentRule class
+		
+		//should change the function a lot to ensure functionality
 		Statement stmt = conn.createStatement();
 		
 		ResultSet rs = stmt.executeQuery("SELECT NAME from SYMPTOMS");

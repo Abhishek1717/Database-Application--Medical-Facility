@@ -4,15 +4,30 @@ import java.sql.*;
 public class staffEnterVital {
 	Connection conn = null;
 	
+	int temperature;
+	int systolic;
+	int diastolic;
+	
 	staffEnterVital(Connection con){
 		this.conn = con;
-		System.out.println("This is the staff entering the patient's vital page.\n ");
+		System.out.println("Please enter the patient's vitals before proceeding.\n ");
 	}
 	public void listMenu() {
-		System.out.println("1. Enter Vitals");
-		System.out.println("2. Go back");
 		
 		Scanner input = new Scanner(System.in);
+		
+		System.out.println("A. Enter Vitals: ");
+		this.temperature = input.nextInt();
+		System.out.println("B. Systolic Blood Pressure: ");
+		this.systolic  = input.nextInt();
+		System.out.println("C. Diastolic Blood Pressure: ");
+		this.diastolic = input.nextInt();
+		
+		
+		System.out.println("1. Record");
+		System.out.println("2. Go back");
+		
+		
 		System.out.println("Enter your choice to fill : ");		
 		int choice = input.nextInt();
 		input.close();

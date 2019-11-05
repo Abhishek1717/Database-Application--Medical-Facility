@@ -3,6 +3,7 @@ import java.sql.*;
 
 public class addSymptoms {
 	Connection conn = null;
+	
 	String symptomName;
 	String symptomBpCode;
 	String symptomSeverity;
@@ -19,7 +20,7 @@ public class addSymptoms {
 		System.out.println("A. Symptom Name : ");
 		this.symptomName = input.nextLine();
 		System.out.println("B. Symptom Body Part : ");
-		this.symptomBPCode = input.nextLine();
+		this.symptomBpCode = input.nextLine();
 		System.out.println("C. Symptom Severity : ");
 		this.symptomSeverity = input.nextLine();
 		
@@ -49,4 +50,3 @@ public class addSymptoms {
 	}
 }
 
-}

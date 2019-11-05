@@ -6,12 +6,14 @@ import java.util.*;
 
 public class SignIn {
 	
+	Connection conn = null;
+	
 	int facilityId;
 	String lastName;
 	java.util.Date dob;
 	String city;
 	Boolean isPatient;
-	Connection conn = null;
+	
 	public SignIn(Connection con) {
 		
 		System.out.println("This is the SignIn page.");
@@ -40,11 +42,11 @@ public class SignIn {
 		}
 		
 		System.out.println("D.City");
-		String city = input.nextLine();
+		this.city = input.nextLine();
 		
 		System.out.println("B. Are you a Patient? (Y/n)");
-		Boolean isPatient = input.nextLine() == "Y" ? true : false;
-		
+		this.isPatient = (input.nextLine() == "Y" || input.nextLine() == "y") ? true : false;
+			
 		if (isPatient) {
 			patientRouting pr = new patientRouting(conn);
 		}
