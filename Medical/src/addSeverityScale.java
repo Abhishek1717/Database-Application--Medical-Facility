@@ -29,10 +29,6 @@ public class addSeverityScale {
 		{
 			break;
 		}
-		case 3:
-		{
-			break;
-		}
 		default:
 		{
 			System.out.println("Please enter valid choice");
