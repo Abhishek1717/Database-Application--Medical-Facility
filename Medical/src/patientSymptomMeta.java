@@ -17,11 +17,11 @@ public class patientSymptomMeta {
 		
 	}
 	
-	public void showAllOptions() throws SQLException {
+	public void showAllOptions(int bodyPart) throws SQLException {
 		
 		Scanner input = new Scanner(System.in);
 		
-		System.out.println("1. Body Part");
+		System.out.println(" 1. Enter the  Body Part");
 		System.out.println("2. Duration");
 		System.out.println("3. Is it a reoccurence? (Y/n)");
 		System.out.println("4. Severity");
@@ -33,9 +33,19 @@ public class patientSymptomMeta {
 		switch(choice) {
 		
 		case 1:
-		{Statement stmt = conn.createStatement();
-		
-		ResultSet rs = stmt.executeQuery("SELECT NAME from BODY_PART");
+		{
+			if(!bodyPart){
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT NAME from BODY_PART");
+				int i=0;
+				while(rs.next()) {
+					String x = rs.getString("NAME");
+					System.out.print(i) ;
+					System.out.println(". " + x) ;
+					// Insert into table 
+					i++;	
+				}
+			}
 		
 		break;
 		}

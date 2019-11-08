@@ -26,7 +26,7 @@ public class patientRouting {
 		}
 		System.out.println("Enter the number of the facility from  the above list  ")
 		int faciltiy=sc.nextInt();
-	// sending(fac.get(facility),patientId);
+	// sending(fac.get(facility),patientId); if the patient is already checked in that facility display error message
 		boolean x;
 		if(x) {
 			patientCheckIn pci=new patientCheckIn(conn);
@@ -36,6 +36,8 @@ public class patientRouting {
 		
 	
 	public void checkOutAck() {
+		/////  need to complete this
+	}
 		
 	}
 	public void checkIn_Ack() {
@@ -46,8 +48,7 @@ public class patientRouting {
 		int check=sc.nextInt();
 		while(true){
 			 if(check==3) {
-		 
-			 return;
+		       return;
 		 }
 		 else if(check==1) {
 			 checkIn();			 break;

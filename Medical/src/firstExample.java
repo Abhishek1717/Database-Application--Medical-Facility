@@ -1,4 +1,3 @@
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -19,8 +18,8 @@ public class firstExample {
 
             Class.forName("oracle.jdbc.driver.OracleDriver");
 
-	    String user = "skmuppal";	// For example, "jsmith"
-	    String passwd = "200314061";	// Your 9 digit student ID number or password
+	    String user = "skmuppal";	     // For example, "jsmith"
+	    String passwd = "200314061";	  // Your 9 digit student ID number or password
 
 
             Connection conn = null;
@@ -40,18 +39,20 @@ public class firstExample {
 			System.out.println("3--->Demo Queries");
 			System.out.println("4--->Exit");
 			int j;
+			System.out.println("Enter your choice");
 			Scanner sc=new Scanner(System.in);
 			int Home=sc.nextInt();
 			if(Home==1) {
-				SignIn sin= new SignIn();
+				SignIn sin= new SignIn(conn);
+				sin.signingIn();
 				}
 			else if(Home==2) {
 				SignUp siup=new SignUp();
-				siup.Proceed(conn);
+				Head=siup.Proceed(conn);
 				System.out.println("Back to home");
 			}
 			else if(Home==3) {
-				DemoQueries dm= new DemoQueries();
+				DemoQueries dm= new DemoQueries();               
 			}
 			else if(Home==4) {
 				
@@ -64,7 +65,8 @@ public class firstExample {
 			}
 			else {
 				System.out.println("Please enter a valid choice");
-			}
+		 
+		}
 		}
 
 		rs = stmt.executeQuery("SELECT name FROM MEDICAL_FACILITY");

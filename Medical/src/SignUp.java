@@ -32,7 +32,8 @@ public class SignUp {
     	phone_No=sc.nextLine();
     	
     	Statement stmt=conn.createStatement();
-    	stmt.executeUpdate("INSERT INTO  " + "");
+    	/////////////////// insert into 
+    	/////stmt.executeUpdate("INSERT INTO  " + "");
     	
     	System.out.println("Sign up successfull");
     	System.out.println("Navigating to Sign In..");
@@ -46,8 +47,9 @@ public class SignUp {
 		 System.out.println("1-->Sign up");
 		 System.out.println("2-->Go Back");
 		 Scanner sc=new Scanner(System.in);
-		 int I_sup=sc.nextInt();
+		 
 		 while(true){
+			 int I_sup=sc.nextInt();
 			 if(I_sup==2) {
 		 
 			 return false;

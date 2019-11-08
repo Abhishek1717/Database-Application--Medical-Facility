@@ -23,9 +23,20 @@ public class SignIn {
 	public void signingIn() {
 		
 		System.out.println("Please enter the following details in order before proceeding to sign in./n");
-		
-		Scanner input = new Scanner(System.in);
-		
+		 System.out.println("1-->Sign In");
+		 System.out.println("2-->Go Back");
+		 
+		Scanner input = new Scanner(System.in);             /// staff and patient login verification
+		int proceed=input.nextInt();
+		if(proceed==2){
+			System.out.println("Back to home page");
+			return;
+		}
+		else if(proceed==1)
+		{
+			System.out.println("B. Are you a Patient? (Y/n)");
+			this.isPatient = (input.nextLine() == "Y" || input.nextLine() == "y") ? true : false;
+		if(isPatient){	
 		System.out.println("A. Facility ID : ");
 		this.facilityId = input.nextInt();
 		
@@ -44,11 +55,20 @@ public class SignIn {
 		System.out.println("D.City");
 		this.city = input.nextLine();
 		
-		System.out.println("B. Are you a Patient? (Y/n)");
-		this.isPatient = (input.nextLine() == "Y" || input.nextLine() == "y") ? true : false;
-			
-		if (isPatient) {
+		
+		
+		/////////////////////////////////       validate credentials    ///////////////////////////////////////
 			patientRouting pr = new patientRouting(conn);
+			pr.checkIn_Ack();
+		
+		
+		}
+		else{
+			//staff sign in.......................
+		}
+		}
+		else{
+			System.out.println("Enter a valid choice");
 		}
 	}
 	
