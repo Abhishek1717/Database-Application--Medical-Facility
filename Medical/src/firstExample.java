@@ -48,11 +48,11 @@ public class firstExample {
 				}
 			else if(Home==2) {
 				SignUp siup=new SignUp();
-				Head=siup.Proceed(conn);
-				System.out.println("Back to home");
+				siup.Proceed(conn);
+				
 			}
 			else if(Home==3) {
-				DemoQueries dm= new DemoQueries();               
+			//	DemoQueries dm= new DemoQueries();               
 			}
 			else if(Home==4) {
 				
@@ -67,20 +67,18 @@ public class firstExample {
 				System.out.println("Please enter a valid choice");
 		 
 		}
-		}
+		
 
-		rs = stmt.executeQuery("SELECT name FROM MEDICAL_FACILITY");
+		//rs = stmt.executeQuery("SELECT name FROM MEDICAL_FACILITY");
 
 		// Now rs contains the rows of coffees and prices from
 		// the COFFEES table. To access the data, use the method
 		// NEXT to access all rows in rs, one row at a time
 
-		while (rs.next()) {
-		    String s = rs.getString("name");
-		    System.out.println(s);
-		}
+		
 
-            } finally {
+            }
+		} finally {
                 close(rs);
                 close(stmt);
                 close(conn);
