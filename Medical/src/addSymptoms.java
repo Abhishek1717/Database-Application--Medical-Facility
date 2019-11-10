@@ -17,10 +17,15 @@ public class addSymptoms {
 		System.out.println("Please enter the following details in order before proceeding. /n");
 		Scanner input = new Scanner(System.in);
 		
+		
 		System.out.println("A. Symptom Name : ");
 		this.symptomName = input.nextLine();
+		
+		//// these are optional
 		System.out.println("B. Symptom Body Part : ");
 		this.symptomBpCode = input.nextLine();
+		
+		/// get all the severity scales for the user to choose from 
 		System.out.println("C. Symptom Severity : ");
 		this.symptomSeverity = input.nextLine();
 		
@@ -35,11 +40,15 @@ public class addSymptoms {
 		switch(choice) {
 		
 		case 1:
-		{
+		{   
+			////  Insert into symptom table..
+			
+			System.out.println("BAck to Staff Menu Page");
 			break;
 		}
 		case 2:
 		{
+			System.out.println("BAck to Staff Menu Page");
 			break;
 		}
 		default:
