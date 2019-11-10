@@ -11,22 +11,30 @@ public class addSeverityScale {
 	}
 	
 	public void displayMenu() {
+		
+		List<String> scale= new ArrayList<String>();
+		while(true) {
+			
+		System.out.println("Enter your choice to fill : ");	
 		System.out.println("1.There's another level to this scale");
 		System.out.println("2.There's no more levels, Go Back");
 		
 		Scanner input = new Scanner(System.in); 
 		
-		System.out.println("Enter your choice to fill : ");		
+			
 		int choice = input.nextInt();
 		
 		switch(choice) {
 		
 		case 1:
-		{
+		{    System.out.println("Enter the level");
+		     String  newscale = input.nextLine();
+			 scale.add(newscale);
 			break;
 		}
 		case 2:
-		{
+		{   /// send the scale details to sql and add in table
+			System.out.println("BAck to Staff Menu Page");
 			break;
 		}
 		default:
@@ -36,6 +44,7 @@ public class addSeverityScale {
 		}
 		
 		input.close();
+		}
 	}
 	
 }
