@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -10,7 +11,7 @@ public class SignIn {
 	
 	int facilityId;
 	String lastName;
-	java.util.Date dob;
+	Date dob;
 	String city;
 	Boolean isPatient;
 	
@@ -28,6 +29,7 @@ public class SignIn {
 		 
 		Scanner input = new Scanner(System.in);             /// staff and patient login verification
 		int proceed=input.nextInt();
+		
 		if(proceed==2){
 			System.out.println("Back to home page");
 			return;
@@ -35,27 +37,44 @@ public class SignIn {
 		else if(proceed==1)
 		{
 			System.out.println("B. Are you a Patient? (Y/n)");
-			this.isPatient = (input.nextLine() == "Y" || input.nextLine() == "y") ? true : false;
+			Character ispat=input.next().charAt(0);
+			
+		   if(ispat == 'Y' || ispat == 'y') 
+			   isPatient=true;
+		   else
+			   isPatient=false;
+		  
 		if(isPatient){	
+			/////////////////list of facility ID's has to be displayed here..Select statement
+			
 		System.out.println("A. Facility ID : ");
 		this.facilityId = input.nextInt();
 		
 		System.out.println("B.Last Name");
 		this.lastName = input.nextLine();
 		
-		System.out.println("C.Date of Birth(mm-dd-yyyy");
+		System.out.println("C.Date of Birth(yyyy-mm-dd");
 		String date = input.nextLine();
-		SimpleDateFormat format = new SimpleDateFormat("mm-dd-yyyy");
-		try {
-			this.dob = (java.util.Date) format.parse(date);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		
+			dob = Date.valueOf(date);
+		
 		
 		System.out.println("D.City");
 		this.city = input.nextLine();
 		
-		
+		String sql ="CALL RetrieveUser(?,?,?,?,?)";
+    	CallableStatement cstmt;
+		try {
+			cstmt = conn.prepareCall(sql);
+			cstmt.setInt(1, facilityId);
+	    	cstmt.setString(2, lastName);
+	    	cstmt.setString(3, city);
+	    	cstmt.setDate(4, (Date) dob);
+	    	cstmt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		/////////////////////////////////       validate credentials    ///////////////////////////////////////
 			patientRouting pr = new patientRouting(conn);
@@ -65,6 +84,8 @@ public class SignIn {
 		}
 		else{
 			//staff sign in.......................
+			
+			staffMenu sm= new staffMenu(conn);
 		}
 		}
 		else{

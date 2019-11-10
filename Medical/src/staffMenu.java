@@ -23,28 +23,32 @@ public class staffMenu {
 		System.out.println("Enter your choice to fill : ");
 		
 		int choice = input.nextInt();
-		
+		while(true) {
 		switch(choice) {
 		
 		case 1:
 		{
-		
+		 staffProcessPatient spp= new staffProcessPatient(conn);
 		break;
 		}
 		case 2:
-		{
+		{   
+			///////////// which class to call here.???????????
+			staffcheckout patient();
 			break;
 		}
 		case 3:
 		{
+			addSymptoms as = new addSymptoms(conn); 
 			break;
 		}
 		case 4:
 		{
+			addSeverityScale  adSeverity=new addSeverityScale(conn);
 			break;
 		}
 		case 5:
-		{
+		{   addAssessmentRule aar= new  addAssessmentRule(conn);
 			break;
 		}
 		case 6:
@@ -55,6 +59,9 @@ public class staffMenu {
 		{
 			System.out.println("Please enter valid choice");
 		}
+		}
+		if(choice==6)
+			break;
 		}
 		
 	}

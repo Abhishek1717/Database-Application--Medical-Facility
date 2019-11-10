@@ -1,13 +1,15 @@
 import java.util.*;
 import java.sql.*;
+import java.sql.Date;
 import java.text.*;
 public class SignUp {
-    public String firstName,lastName,ad_City,ad_State,ad_Country,ad_Street,ad_flat,phone_No;
-    public java.util.Date dob;
+    public String firstName,lastName,ad_City,ad_State,ad_Country,ad_Street,phone_No;
+    public int ad_flat;
+    public Date dob;
 	public SignUp() {
 		System.out.println("This is Sign up page");
 	}
-    public void complete_signup(Connection conn) {
+    public void complete_signup(Connection conn) throws ParseException {
     	Scanner sc=new Scanner(System.in);
     	System.out.println("Enter Firstname");
     	firstName=sc.nextLine();
@@ -15,11 +17,12 @@ public class SignUp {
     	lastName=sc.nextLine();
     	System.out.println("Enter Date of Birth");
     	String date =sc.nextLine();
-    	SimpleDateFormat format = new SimpleDateFormat("mm-dd-yyyy");
-    	this.dob = (java.util.Date) format.parse(date);
+    	//SimpleDateFormat format = new SimpleDateFormat("mm-dd-yyyy");
+    	this.dob = Date.valueOf(date);
     	System.out.println("Enter Address" );
     	System.out.println("Enter Flat_No" );
-    	ad_flat=sc.nextLine();
+    	ad_flat=sc.nextInt();
+    	String s=sc.nextLine();
     	System.out.println("Enter Street Name");
     	ad_Street=sc.nextLine();
     	System.out.println("Enter City");
@@ -31,13 +34,31 @@ public class SignUp {
     	System.out.println("Enter Phone Number" );
     	phone_No=sc.nextLine();
     	
-    	Statement stmt=conn.createStatement();
-    	/////////////////// insert into 
-    	/////stmt.executeUpdate("INSERT INTO  " + "");
+    	
+    	String sql = "{CALL SignUp(?,?,?,?,?,?,?,?,?)}";
+    	CallableStatement cstmt;
+		try {
+			cstmt = conn.prepareCall("{CALL SignUp(?,?,?,?,?,?,?,?,?)}");
+			
+			cstmt.setString(1, firstName);
+	    	cstmt.setString(2, lastName);
+	    	cstmt.setDate(3, (Date) dob);
+	    	cstmt.setString(4, phone_No);
+	    	cstmt.setInt(5, ad_flat);
+	    	cstmt.setString(6, ad_Street);
+	    	cstmt.setString(7, ad_City);
+	    	cstmt.setString(8, ad_State);
+	    	cstmt.setString(9, ad_Country);
+	    	cstmt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
     	
     	System.out.println("Sign up successfull");
     	System.out.println("Navigating to Sign In..");
-    	SignIn Sup_Sin=new SignIn();
+    	SignIn Sup_Sin=new SignIn(conn);
     	Sup_Sin.signingIn();
     	
     	
@@ -55,7 +76,12 @@ public class SignUp {
 			 return false;
 		 }
 		 else if(I_sup==1) {
-			 complete_signup(conn);
+			 try {
+				complete_signup(conn);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			 break;
 		 }
 		 else {
