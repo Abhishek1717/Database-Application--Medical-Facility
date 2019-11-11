@@ -10,7 +10,7 @@ public class staffPatientReportConfirmation {
 		this.conn = con;
 	}
 	
-	public void displayMenu() {
+	public int displayMenu() {
 		
 		//Display all the information to be given in the report
 		//See the initial pdf for the details, when implementing
@@ -22,16 +22,21 @@ public class staffPatientReportConfirmation {
 		
 		System.out.println("Enter your choice to fill : ");		
 		int choice = input.nextInt();
-		
+		while(true) {
 		switch(choice) {
 		
 		case 1:
-		{
-			break;
+		{   
+			System.out.println("Report Confirmed");
+			return 1;
+		    	
+		
 		}
 		case 2:
 		{
-			break;
+			System.out.println("Redirecting back to Staff-Patient Report");
+			return 0;
+			
 		}
 		default:
 		{
@@ -39,7 +44,8 @@ public class staffPatientReportConfirmation {
 		}
 		}
 		
-		input.close();
+		return 1;
+		}
 		
 		
 	}
