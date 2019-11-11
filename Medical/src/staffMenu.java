@@ -5,9 +5,21 @@ public class staffMenu {
 	
 	Connection conn = null;
 	
-	staffMenu(Connection con){
+	int empId;
+	int facilityId;
+	staffMenu(Connection con, int facId, int eId){
 		this.conn = con;
-		System.out.println("This is the Staff menu. \n");
+		this.empId = eId;
+		this.facilityId = facId;
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet temp = stmt.executeQuery("SELECT STAFF_NAME FROM MEDICAL_STAFF WHERE EMPLOYEE_ID == " + empId);
+			String sName = temp.getString("STAFF_NAME");
+			System.out.println("This is the Staff menu of " + sName);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void displayMenu() {

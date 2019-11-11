@@ -11,6 +11,7 @@ public class SignIn {
 	
 	int facilityId;
 	String lastName;
+	int empId;
 	Date dob;
 	String city;
 	Boolean isPatient;
@@ -46,50 +47,87 @@ public class SignIn {
 		  
 		if(isPatient){	
 			/////////////////list of facility ID's has to be displayed here..Select statement
+			Statement stmt;
+			try {
+				stmt = conn.createStatement();
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			ResultSet rs;
+			try {
+				rs = stmt.executeQuery("Select NAME from Medical_Facility");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			int i=0;
+			List<String> fac= new ArrayList<String>();
+			while(rs.next()) {
+				String x;
+				try {
+					x = rs.getString("NAME");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println(i + " " + x) ;
+				fac.add(x);
+				i++;
+				
+				
+			}
 			
-		System.out.println("A. Facility ID : ");
-		this.facilityId = input.nextInt();
-		
-		System.out.println("B.Last Name");
-		this.lastName = input.nextLine();
-		
-		System.out.println("C.Date of Birth(yyyy-mm-dd");
-		String date = input.nextLine();
-		
-			dob = Date.valueOf(date);
-		
-		
-		System.out.println("D.City");
-		this.city = input.nextLine();
-		
-		String sql ="CALL RetrieveUser(?,?,?,?,?)";
-    	CallableStatement cstmt;
-		try {
-			cstmt = conn.prepareCall(sql);
-			cstmt.setInt(1, facilityId);
-	    	cstmt.setString(2, lastName);
-	    	cstmt.setString(3, city);
-	    	cstmt.setDate(4, (Date) dob);
-	    	cstmt.executeQuery();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		/////////////////////////////////       validate credentials    ///////////////////////////////////////
-			patientRouting pr = new patientRouting(conn);
-			pr.checkIn_Ack();
-		
-		
+			
+			System.out.println("A. Facility ID : ");
+			this.facilityId = input.nextInt();
+			
+			System.out.println("B.Last Name");
+			this.lastName = input.nextLine();
+			
+			System.out.println("C.Date of Birth(yyyy-mm-dd");
+			String date = input.nextLine();
+			
+				dob = Date.valueOf(date);
+			
+			
+			System.out.println("D.City");
+			this.city = input.nextLine();
+			
+			/// Should return patient on successful insertion(STORED PROCEDURE) ////
+			String sql ="CALL RetrieveUser(?,?,?,?,?)"; 
+	    	CallableStatement cstmt;
+			try {
+				cstmt = conn.prepareCall(sql);
+				cstmt.setInt(1, facilityId);
+		    	cstmt.setString(2, lastName);
+		    	cstmt.setString(3, city);
+		    	cstmt.setDate(4, (Date) dob);
+		    	cstmt.executeQuery();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			/////////////////////////////////       validate credentials    ///////////////////////////////////////
+				patientRouting pr = new patientRouting(conn);
+				pr.checkIn_Ack();
+			
+			
 		}
 		else{
 			//staff sign in.......................
+			System.out.println("A. Facility ID : ");
+			this.facilityId = input.nextInt();
 			
-			staffMenu sm= new staffMenu(conn);
+			System.out.println("B. Employee Id");
+			this.empId = input.nextInt();
+			
+			staffMenu sm= new staffMenu(conn, facilityId, empId);
 		}
 		}
 		else{
 			System.out.println("Enter a valid choice");
+
 		}
 	}
 	
