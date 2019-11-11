@@ -34,8 +34,9 @@ public class addSeverityScale {
 		}
 		case 2:
 		{   /// send the scale details to sql and add in table
-			System.out.println("BAck to Staff Menu Page");
-			break;
+			System.out.println("Back to Staff Menu Page");
+			input.close();
+			return;
 		}
 		default:
 		{

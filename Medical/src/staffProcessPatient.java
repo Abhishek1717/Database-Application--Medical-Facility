@@ -30,9 +30,9 @@ public class staffProcessPatient {
 		}
 		case 2:
 		{
-			/// get primary departmetn and secondary dep of this user if it is same push patient to treated list
-			
-		else {
+			if{/// get primary departmetn and secondary dep of this user if it is same push patient to treated list
+				}
+		   else {
 			System.out.println("inadequate privilege");
 		}
 			break;

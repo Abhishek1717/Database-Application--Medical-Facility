@@ -40,8 +40,9 @@ public class staffEnterVital {
 		     break;
 		}
 		case 2:
-		{  System.out.println(" In Staff Process Patient");
-			break;
+		{   System.out.println(" Going back to Staff Process Patient");
+			input.close();
+			return;
 		}
 		default:
 		{

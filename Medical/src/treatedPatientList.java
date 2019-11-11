@@ -31,7 +31,8 @@ public class treatedPatientList {
 			System.out.println(". " + patients[i-1]);
 		}
 		
-		System.out.println("Please enter your choice no: ");
+		System.out.println("Please enter "
+				+ "your choice no: ");
 		
 		int choice = input.nextInt();
 		
@@ -47,21 +48,29 @@ public class treatedPatientList {
 		
 		System.out.println("Enter your choice to fill : ");		
 		choice = input.nextInt();
-		
-		switch(choice) {
-		
-		case 1:
-		{
-			break;
+		int status = 5;
+		while(status == 5) {
+			switch(choice) {
+			
+			case 1:
+			{
+				patientReport pr = new patientReport(conn);
+				status = pr.displayMenu();
+				break;
+			}
+			case 2:
+			{
+				status = 1;
+				break;
+			}
+			default:
+			{
+				System.out.println("Please enter valid choice");
+			}
+			}
 		}
-		case 2:
-		{
-			break;
-		}
-		default:
-		{
-			System.out.println("Please enter valid choice");
-		}
+		if(status == 1) {
+			System.out.println("Redirecting back to staff menu");
 		}
 	}
 

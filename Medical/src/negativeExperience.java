@@ -37,7 +37,8 @@ public class negativeExperience {
 		}
 		case 4:
 		{
-			break;
+			input.close();
+			return;
 		}
 		default:
 		{

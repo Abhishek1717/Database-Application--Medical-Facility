@@ -38,7 +38,8 @@ public class referralStatus {
 		}
 		case 4:
 		{
-			break;
+			input.close();
+			return;
 		}
 		default:
 		{

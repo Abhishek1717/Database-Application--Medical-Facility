@@ -110,7 +110,7 @@ public class SignIn {
 			
 			/////////////////////////////////       validate credentials    ///////////////////////////////////////
 				patientRouting pr = new patientRouting(conn);
-				pr.checkIn_Ack();
+				pr.checkIn_Ack(facilityId, empId);
 			
 			
 		}
@@ -122,7 +122,10 @@ public class SignIn {
 			System.out.println("B. Employee Id");
 			this.empId = input.nextInt();
 			
-			staffMenu sm= new staffMenu(conn, facilityId, empId);
+			////////////  SQL Stored Procedure to validate if staff credentials exist ///////////////
+			if(/* the validation is true*/) {
+				staffMenu sm= new staffMenu(conn, facilityId, empId);
+			}
 		}
 		}
 		else{

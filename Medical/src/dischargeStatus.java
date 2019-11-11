@@ -43,7 +43,8 @@ public class dischargeStatus {
 		}
 		case 4:
 		{
-			break;
+			input.close();
+			return;
 		}
 		default:
 		{

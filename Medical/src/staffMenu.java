@@ -17,7 +17,7 @@ public class staffMenu {
 			String sName = temp.getString("STAFF_NAME");
 			System.out.println("This is the Staff menu of " + sName);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Incorrect Sign in");
 			e.printStackTrace();
 		}
 	}
@@ -46,7 +46,8 @@ public class staffMenu {
 		case 2:
 		{   
 			///////////// which class to call here.???????????
-			staffcheckout patient();
+			treatedPatientList tpl = new treatedPatientList(conn);
+			tpl.ListAllPatients();
 			break;
 		}
 		case 3:
@@ -56,11 +57,11 @@ public class staffMenu {
 		}
 		case 4:
 		{
-			addSeverityScale  adSeverity=new addSeverityScale(conn);
+			addSeverityScale  adSeverity = new addSeverityScale(conn);
 			break;
 		}
 		case 5:
-		{   addAssessmentRule aar= new  addAssessmentRule(conn);
+		{   addAssessmentRule aar = new  addAssessmentRule(conn);
 			break;
 		}
 		case 6:
