@@ -11,7 +11,7 @@ public class dischargeStatus {
 		
 	}
 	
-	public void displayMenu() {
+	public String displayMenu() {
 		
 		// I think that there is no need of menu
 		// Since we can just return the status and provide
@@ -23,7 +23,7 @@ public class dischargeStatus {
 		System.out.println("4. Go Back");
 		
 		Scanner input = new Scanner(System.in); 
-		
+		String discharge="";
 		System.out.println("Enter your choice to fill : ");		
 		int choice = input.nextInt();
 		
@@ -31,20 +31,20 @@ public class dischargeStatus {
 		
 		case 1:
 		{
-			break;
+			return "Successful Treatment";
 		}
 		case 2:
 		{
-			break;
+			return "Deceased";
 		}
 		case 3:
 		{
-			break;
+			return "Referred";
 		}
 		case 4:
 		{
-			input.close();
-			return;
+		    return discharge;
+		  
 		}
 		default:
 		{
@@ -52,7 +52,9 @@ public class dischargeStatus {
 		}
 		}
 		
+		
 		input.close();
+		return discharge;
 	}
 
 }
