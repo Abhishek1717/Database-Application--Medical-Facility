@@ -28,16 +28,20 @@ public class patientCheckoutAcknowledgment {
 		switch(choice) {
 		
 		case 1:
-		{
-			break;
+		{   return;
+			
 		}
 		case 2:
-		{
+		{   
+			System.out.println("Please enter the reason");
+			String reason=input.nextLine();
+			
 			break;
 		}
 		case 3:
-		{
-			break;
+		{   
+			return;
+			
 		}
 		default:
 		{
