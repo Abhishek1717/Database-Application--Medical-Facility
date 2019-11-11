@@ -2,7 +2,8 @@ import java.util.*;
 import java.sql.*;
 
 public class negativeExperience {
-	
+	int NegativeCode;
+	String Description;
 	Connection conn = null;
 	public negativeExperience(Connection con) {
 		System.out.println("This is the negative experience page");
@@ -11,10 +12,9 @@ public class negativeExperience {
 	}
 	
 	public void displayMenu() {
-		System.out.println("1. Negative Experience code");
-		System.out.println("2. Description");
-		System.out.println("3. Save");
-		System.out.println("4. Go Back");
+		System.out.println("1. Want to enter Negative Experience");
+		
+		System.out.println("2. Go Back");
 		
 		Scanner input = new Scanner(System.in); 
 		
@@ -23,21 +23,19 @@ public class negativeExperience {
 		
 		switch(choice) {
 		
+		
 		case 1:
-		{
-			break;
+		{    
+			System.out.println("Enter 1-Misdiagnosis");
+			System.out.println(" Enter 2-Patient acquired infection during hospital stay.");
+			NegativeCode=input.nextInt();
+			System.out.println("Enter Description");
+			Description=input.nextLine();
+			return;
 		}
 		case 2:
 		{
-			break;
-		}
-		case 3:
-		{
-			break;
-		}
-		case 4:
-		{
-			input.close();
+			System.out.println("Redirecting back to patient Staff patient report");
 			return;
 		}
 		default:
