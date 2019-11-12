@@ -45,7 +45,7 @@ public class staffMenu {
 		}
 		case 2:
 		{   
-			///////////// which class to call here.???????????
+			
 			treatedPatientList tpl = new treatedPatientList(conn);
 			tpl.ListAllPatients();
 			break;

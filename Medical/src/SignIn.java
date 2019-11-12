@@ -39,41 +39,20 @@ public class SignIn {
 		{
 			System.out.println("B. Are you a Patient? (Y/n)");
 			Character ispat=input.next().charAt(0);
-			
+			input.nextLine();
 		   if(ispat == 'Y' || ispat == 'y') 
 			   isPatient=true;
 		   else
 			   isPatient=false;
 		  
-/////////////////list of facility ID's has to be displayed here..Select statement
-		Statement stmt;
-		
-		ResultSet rs;
-		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery("Select NAME from Medical_Facility");
-			int i=0;
-			List<String> fac= new ArrayList<String>();
-			while(rs.next()) {
-				String x;
-				x = rs.getString("NAME");
-				System.out.println(i + " " + x) ;
-				fac.add(x);
-				i++;
-				
-				
-			}
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+		   
 		
 		if(isPatient){	
 			
 			
 			
 			
-			System.out.println("A. Facility ID : ");
-			this.facilityId = input.nextInt();
+		
 			
 			System.out.println("B.Last Name");
 			this.lastName = input.nextLine();
@@ -86,35 +65,39 @@ public class SignIn {
 			
 			System.out.println("D.City");
 			this.city = input.nextLine();
-			int patientID = 0;
+			int patientID = -1;
 			/// ******Should return patient on successful insertion(STORED PROCEDURE) ////
-			String sql ="CALL RetrieveUser(?,?,?,?,?,?)"; 
+			String sql ="CALL RetrieveUser(?,?,?,?,?)"; 
 	    	CallableStatement cstmt;
 			try {
 				cstmt = conn.prepareCall(sql);
-				cstmt.setInt(1, facilityId);
-		    	cstmt.setString(2, lastName);
-		    	cstmt.setString(3, city);
-		    	cstmt.setDate(4, (Date) dob);
-		    	cstmt.setString(5, "Y");
-		    	cstmt.registerOutParameter(6, patientID);
+				
+		    	cstmt.setString(1, lastName);
+		    	cstmt.setString(2, city);
+		    	cstmt.setDate(3, (Date) dob);
+		    	cstmt.setString(4, "Y");
+		    	cstmt.registerOutParameter(5, Types.INTEGER);
+		    	
 		    	
 		    	cstmt.executeQuery();
-			} catch (SQLException e) {
+		    	
+		    	patientID=cstmt.getInt(5);
+		    	System.out.println(patientID);
+		    	} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
 			/////////////////////////////////       validate credentials    ///////////////////////////////////////
-				patientRouting pr = new patientRouting(conn);
-				pr.checkIn_Ack(patientID,facilityId);
+				if(patientID!=-1)
+					{patientRouting pr = new patientRouting(conn);
+			  pr.checkIn_Ack(patientID,facilityId);}
 			
 			
 		}
 		else{
 			//staff sign in.......................
-			System.out.println("A. Facility ID : ");
-			this.facilityId = input.nextInt();
+			
 			
 			System.out.println("B.Last Name");
 			this.lastName = input.nextLine();
@@ -133,20 +116,29 @@ public class SignIn {
 	    	CallableStatement cstmt;
 			try {
 				cstmt = conn.prepareCall(sql);
-				cstmt.setInt(1, facilityId);
-		    	cstmt.setString(2, lastName);
-		    	cstmt.setString(3, city);
-		    	cstmt.setDate(4, (Date) dob);
-		    	cstmt.setString(5,"N");
-		    	cstmt.registerOutParameter(2, empId);
+			
+		    	cstmt.setString(1, lastName);
+		    	cstmt.setString(2, city);
+		    	cstmt.setDate(3, (Date) dob);
+		    	cstmt.setString(4,"N");
+		    	cstmt.registerOutParameter(5, Types.INTEGER);
+		    	
+		    	
 		    	cstmt.executeQuery();
+		    	
+		    	empId=cstmt.getInt(5);
+		    	System.out.println("Staff");
+		    	System.out.println(empId);
+		    	if(empId!=-1);
+		    	//staffMenu sm= new staffMenu(conn, empId, facid);
+		    	
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			////////////  SQL Stored Procedure to validate if staff credentials exist ///////////////
 			//if(/* the validation is true*/) {
-				staffMenu sm= new staffMenu(conn, facilityId, empId);
+				
 			}
 		}
 		

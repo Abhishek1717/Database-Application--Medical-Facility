@@ -11,11 +11,14 @@ public class staffProcessPatient {
 	public void listMenu() {
 	
 		while(true) {
+		///// need to display the patient list 
+			
 		System.out.println("1. Enter Vitals");
 		System.out.println("2. Treat Patient ");
 		System.out.println("3. Go back");
 		///// need to verify whether this user is medical staff ..
 		///// need to display the patient list 
+		
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter your choice : ");
 		
