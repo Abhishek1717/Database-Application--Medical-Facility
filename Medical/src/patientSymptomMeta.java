@@ -17,11 +17,11 @@ public class patientSymptomMeta {
 		
 	}
 	
-	public void showAllOptions(int bodyPart) throws SQLException {
+	public void showAllOptions(String bodyPart) throws SQLException {
 		
 		Scanner input = new Scanner(System.in);
 		
-		if(bodyPart == -1) {
+		if(bodyPart.equals("-1")) {
 			System.out.println("  Enter the  Body Part");
 			Statement stmt = conn.createStatement();
 			Map<Integer, String> bodyCodes = new HashMap<>();
@@ -37,7 +37,7 @@ public class patientSymptomMeta {
 			}
 			
 			System.out.println("Enter your choice: ");
-			int option = input.nextInt();
+			int choice = input.nextInt();
 			////// send bodyCodes.get(option) to update in the symptom meta data
 			////// include a new attribute named bpCode
 			
@@ -55,7 +55,18 @@ public class patientSymptomMeta {
 		this.incident = input.nextLine();
 		
 		//// pass a SQL query along with the values
-		
+		String sql ="CALL Patient_Checkin(?,?,?,?,?,?,?)"; 
+    	CallableStatement cstmt;
+		try {
+			cstmt = conn.prepareCall(sql);
+			cstmt.setString(1,);
+	    	cstmt.getString(bodyPart);
+	    	cstmt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		input.close();
 	}
 	
 
