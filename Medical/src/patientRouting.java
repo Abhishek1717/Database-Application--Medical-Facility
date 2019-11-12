@@ -15,7 +15,7 @@ public class patientRouting {
 		
 		int faciltiy=sc.nextInt();
 	    
-		// sending(fac.get(facility),patientId); if the patient is already checked in that facility display error message
+		//////////// sending(fac.get(facility),patientId); if the patient is already checked in that facility display error message
 		
 		boolean x = false; //if no error set it to true and proceed to check in
 		if(x) {
