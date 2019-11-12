@@ -1,5 +1,6 @@
 import java.util.*;
 import java.sql.*;
+import java.sql.Date;
 
 public class patientCheckIn {
 	
@@ -54,6 +55,20 @@ public class patientCheckIn {
 			else if(choice >= 1 && choice <= symptoms.size()) {
 				patientSymptomMeta psm=new patientSymptomMeta(conn, bodyCodes.get(choice));
 				int bodyPart=-1;
+				
+			
+		    	CallableStatement cstmt;
+				try {
+					cstmt = conn.prepareCall("{CALL RetrieveBodyPart_Symptom(?,?,?,?,?,?,?,?,?)}");
+					
+					cstmt.setString(1, bodyCodes.get(choice));
+			    	cstmt.registerOutParameter(2, bodyPart);
+		
+			    	cstmt.executeQuery();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				/// if body trigger==null then pass -1 otherwise pass the body part id 
 				psm.showAllOptions(bodyPart);
 			}

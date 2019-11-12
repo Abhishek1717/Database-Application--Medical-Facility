@@ -86,9 +86,9 @@ public class SignIn {
 			
 			System.out.println("D.City");
 			this.city = input.nextLine();
-			
+			int patientID = 0;
 			/// ******Should return patient on successful insertion(STORED PROCEDURE) ////
-			String sql ="CALL RetrieveUser(?,?,?,?,?)"; 
+			String sql ="CALL RetrieveUser(?,?,?,?,?,?)"; 
 	    	CallableStatement cstmt;
 			try {
 				cstmt = conn.prepareCall(sql);
@@ -96,7 +96,8 @@ public class SignIn {
 		    	cstmt.setString(2, lastName);
 		    	cstmt.setString(3, city);
 		    	cstmt.setDate(4, (Date) dob);
-		    	cstmt.setCharacter(5,'Y');
+		    	cstmt.setString(5, "Y");
+		    	cstmt.registerOutParameter(6, patientID);
 		    	
 		    	cstmt.executeQuery();
 			} catch (SQLException e) {
@@ -136,8 +137,8 @@ public class SignIn {
 		    	cstmt.setString(2, lastName);
 		    	cstmt.setString(3, city);
 		    	cstmt.setDate(4, (Date) dob);
-		    	cstmt.setCharacter(5,'N');
-		    	
+		    	cstmt.setString(5,"N");
+		    	cstmt.registerOutParameter(2, empId);
 		    	cstmt.executeQuery();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
