@@ -13,7 +13,7 @@ public class SignUp {
     	Scanner sc=new Scanner(System.in);
     	System.out.println("Enter Firstname");
     	firstName=sc.nextLine();
-    	System.out.println("Enter Lasttname");
+    	System.out.println("Enter Lastname");
     	lastName=sc.nextLine();
     	System.out.println("Enter Date of Birth");
     	String date =sc.nextLine();
