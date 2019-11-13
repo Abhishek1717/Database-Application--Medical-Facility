@@ -76,7 +76,7 @@ public class patientRouting {
 
 		
 	
-	public void checkIn_Ack(int patientID,int Facility_ID) {
+	public void checkIn_Ack(int patientID,int FacilityId) {
 		System.out.println("1-->CheckIn");
 		System.out.println("2-->Check-out-Acknowledgement");
 		System.out.println("3-->Go Back");
@@ -87,11 +87,11 @@ public class patientRouting {
 		       return;
 		 }
 		 else if(check==1) {
-			 checkIn(patientID,Facility_ID);		
+			 checkIn(patientID,FacilityId);		
 			 return;
 		 }
 		 else if(check==2) {
-			patientCheckoutAcknowledgment pcoa = new patientCheckoutAcknowledgment(conn);
+			patientCheckoutAcknowledgment pcoa = new patientCheckoutAcknowledgment(conn, patientID, FacilityId);
 			// 
 			pcoa.displayMenu();
 			return;

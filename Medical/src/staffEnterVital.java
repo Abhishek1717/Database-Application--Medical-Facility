@@ -46,9 +46,8 @@ public class staffEnterVital {
 					cstmt.setString(1, priority);
 			    	cstmt.setInt(2, temperature);
 			    	cstmt.setInt(3, patientid);
-			    	cstmt.setDate(4, (Date) time);  // checkin start time
-			    	cstmt.setInt(5, systolic);
-			    	cstmt.setInt(6,diastolic);
+			    	cstmt.setInt(4, systolic);
+			    	cstmt.setInt(5,diastolic);
 			    	
 			    	cstmt.executeQuery();
 				} catch (SQLException e) {

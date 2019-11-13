@@ -6,6 +6,7 @@ public class patientCheckoutAcknowledgment {
 	Connection conn = null;
 	int patientId;
 	int facilityId;
+
 	public patientCheckoutAcknowledgment(Connection con, int patId, int facId ) {
 		System.out.println("This is the Staff Patient Report Confirmation Page ");
 		this.conn = con;

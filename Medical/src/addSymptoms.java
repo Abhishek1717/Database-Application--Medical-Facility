@@ -22,6 +22,7 @@ public class addSymptoms {
 		this.symptomName = input.nextLine();
 		
 		//// these are optional
+		
 		System.out.println("B. Symptom Body Part : ");
 		this.symptomBpCode = input.nextLine();
 		
