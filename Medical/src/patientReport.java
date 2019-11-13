@@ -30,7 +30,7 @@ public class patientReport {
 			case 1:
 			{
 				dischargeStatus ds = new dischargeStatus(conn);
-				String status = ds.displayMenu();
+				String status1 = ds.displayMenu();
 				///////// send this discharge status as sql query
 				break;
 			}

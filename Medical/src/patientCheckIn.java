@@ -73,9 +73,9 @@ public class patientCheckIn {
 				}
 
 
-				psm.showAllOptions(bodyPart);
+				psm.showAllOptions(bodyPart, PatientID);
 			}
-		
+	
 		}
 				
 	}

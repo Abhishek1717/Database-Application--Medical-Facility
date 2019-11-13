@@ -8,11 +8,13 @@ public class patientSymptomMeta {
 	String bpCode;
 	int duration;
 	boolean recurring;
-	int severity;
+	int severity=0;
 	String incident;
+	String SymptomCode;
 		
-	public patientSymptomMeta(Connection con, String bpCode) {
+	public patientSymptomMeta(Connection con, String SymptomCode) {
 		this.conn = con;
+		this.SymptomCode=SymptomCode;
 		System.out.println("Please enter the metadata for the symptom");
 		
 	}
@@ -56,20 +58,15 @@ public class patientSymptomMeta {
 		
 		//// pass a SQL query along with the values
 		String sql ="CALL Patient_Checkin(?,?,?,?,?,?,?)"; 
-		symptom varchar2,
-		Duration float,
-		patient_id int,
-		startdate Date,
-		Severity varchar2,
-		cause varchar2,
-		FirstTimeOccurence char 
     	CallableStatement cstmt;
 		try {
 			cstmt = conn.prepareCall(sql);
-			cstmt.setString(1,symptom);
-	    	cstmt.setString(2,duration);
-			cstmt.setString(3,);
-	    	cstmt.setString(bodyPart);
+			cstmt.setString(1,SymptomCode);
+	    	cstmt.setInt(2,duration);
+			cstmt.setInt(3,patientID);
+			cstmt.setInt(4,severity);
+			cstmt.setString(5,Incident);
+	    	cstmt.setString(6,FirstTimeOccurence);
 	    	cstmt.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
