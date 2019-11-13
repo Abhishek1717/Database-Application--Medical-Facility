@@ -4,10 +4,14 @@ import java.sql.*;
 public class staffPatientReportConfirmation {
 	
 	Connection conn = null;
+	int patientId;
+	int facilityId;
 	
-	public staffPatientReportConfirmation(Connection con) {
+	public staffPatientReportConfirmation(Connection con, int patId, int facId) {
 		System.out.println("This is the Staff Patient Report Confirmation Page ");
 		this.conn = con;
+		this.patientId = patId;
+		this.facilityId = facId;
 	}
 	
 	public int displayMenu() {
@@ -16,7 +20,9 @@ public class staffPatientReportConfirmation {
 		//See the initial pdf for the details, when implementing
 		try {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("Select EXP_ID, DISCHARGESTATUS, REFERRAL_FACILITY_ID, REFERRER_ID, TREATMENTGIVEN,  EXP_CODE, EXP_DESCRIPTION from EXPERIENCE");
+			int checkinId = stmt.executeQuery("select CHECKIN_ID from LOG_IN where PATIENT_ID = " + patientId + "FACILITY_ID = " + facilityId ).getInt("CHECKIN_ID");
+			ResultSet rs = stmt.executeQuery("Select EXP_ID, DISCHARGESTATUS, REFERRAL_FACILITY_ID, REFERRER_ID, TREATMENTGIVEN,  EXP_CODE, EXP_DESCRIPTION from EXPERIENCE "
+					+ "where PATIENT_ID = " + patientId + " CHECKINID = " + checkinId);
 			int exp_id = rs.getInt("EXP_ID");
 			int fac_id = rs.getInt("REFERRAL_FACILITY_ID");
 			String disSta = rs.getString("DISCHARGESTATUS");
