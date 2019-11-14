@@ -5,12 +5,12 @@ public class patientSymptomMeta {
 	
 	Connection conn;
 	
-	String bpCode;
-	int duration;
+	String bpCode="";
+	int duration=0;
 	boolean recurring;
 	int severity=0;
-	String incident;
-	String SymptomCode;
+	String incident="";
+	String SymptomCode="";
 		
 	public patientSymptomMeta(Connection con, String SymptomCode) {
 		this.conn = con;
@@ -40,6 +40,7 @@ public class patientSymptomMeta {
 			
 			System.out.println("Enter your choice: ");
 			int choice = input.nextInt();
+			
 			////// send bodyCodes.get(option) to update in the symptom meta data
 			////// include a new attribute named bpCode
 			
@@ -48,8 +49,8 @@ public class patientSymptomMeta {
 		System.out.println(" Enter your Duration?");
 		this.duration =  input.nextInt();
 		System.out.println(" Is it a reoccurence? (Y/n)");
-		char option = input.nextLine().charAt(0);
-		this.recurring = (option == 'Y' || option == 'y')  ? true : false;
+		String option = input.nextLine();
+		this.recurring = (option == "Y" || option == "y")  ? true : false;
 		System.out.println(" Severity");
 		// show the severity scale for this and take the suitable input as suitable
 		
@@ -65,8 +66,8 @@ public class patientSymptomMeta {
 	    	cstmt.setInt(2,duration);
 			cstmt.setInt(3,patientID);
 			cstmt.setInt(4,severity);
-			cstmt.setString(5,Incident);
-	    	cstmt.setString(6,FirstTimeOccurence);
+			cstmt.setString(5,incident);
+	    	cstmt.setString(6,option);
 	    	cstmt.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

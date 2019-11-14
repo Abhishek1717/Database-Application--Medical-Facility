@@ -7,8 +7,10 @@ public class addSymptoms {
 	String symptomName;
 	String symptomBpCode;
 	String symptomSeverity;
+	int empId;
 	
-	addSymptoms(Connection con){
+	addSymptoms(Connection con,int empId){
+		this.empId=empId;
 		this.conn = con;
 		System.out.println("This is the staff adding the symptoms page.\n ");
 	}
@@ -27,6 +29,28 @@ public class addSymptoms {
 		this.symptomBpCode = input.nextLine();
 		
 		/// get all the severity scales for the user to choose from 
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			Map<Integer, String> scales = new HashMap<>();
+			ResultSet rs = stmt.executeQuery("SELECT severityscale,severityID, NAME from severity");
+			
+			while(rs.next()) {
+				
+				int x = rs.getInt("severityID");
+				String y=rs.getString("severityscale");
+				 scales.put(x,y);
+				System.out.print(x);
+				System.out.println(". ") ;
+		}
+			} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+			
+		
 		System.out.println("C. Symptom Severity : ");
 		this.symptomSeverity = input.nextLine();
 		

@@ -40,28 +40,28 @@ public class staffMenu {
 		
 		case 1:
 		{
-		 staffProcessPatient spp= new staffProcessPatient(conn);
+		 staffProcessPatient spp= new staffProcessPatient(conn,facilityId,empId);
 		break;
 		}
 		case 2:
 		{   
 			
-			treatedPatientList tpl = new treatedPatientList(conn);
+			treatedPatientList tpl = new treatedPatientList(conn,facilityId,empId);
 			tpl.ListAllPatients();
 			break;
 		}
 		case 3:
 		{
-			addSymptoms as = new addSymptoms(conn); 
+			addSymptoms as = new addSymptoms(conn,empId); 
 			break;
 		}
 		case 4:
 		{
-			addSeverityScale  adSeverity = new addSeverityScale(conn);
+			addSeverityScale  adSeverity = new addSeverityScale(conn,empId);
 			break;
 		}
 		case 5:
-		{   addAssessmentRule aar = new  addAssessmentRule(conn);
+		{   addAssessmentRule aar = new  addAssessmentRule(conn,empId);
 			break;
 		}
 		case 6:

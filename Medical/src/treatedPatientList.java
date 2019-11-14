@@ -5,7 +5,7 @@ public class treatedPatientList {
 	
 	Connection conn;
 	int facilityId;
-	public treatedPatientList(Connection con, int facId) {
+	public treatedPatientList(Connection con, int facId,int empId) {
 		System.out.println("List of Treated patients\n");
 		this.conn = con;
 		this.facilityId = facId;
@@ -14,7 +14,7 @@ public class treatedPatientList {
 	public void ListAllPatients() {
 		
 		// ---> sql statement to retrieve all treated patients and list them out
-		
+		// have to find only treated patient list.
 		ArrayList<String> patients = new ArrayList<String>();
 		
 		Scanner input = new Scanner(System.in);

@@ -58,7 +58,7 @@ public class patientReport {
 			}
 			case 6:
 			{	
-				staffPatientReportConfirmation sprc = new staffPatientReportConfirmation(conn);
+				staffPatientReportConfirmation sprc = new staffPatientReportConfirmation(conn,);
 				status = sprc.displayMenu();
 				break;
 			}

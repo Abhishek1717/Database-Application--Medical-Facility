@@ -4,7 +4,9 @@ import java.sql.*;
 public class addAssessmentRule {
 	
 	Connection conn = null;
-	addAssessmentRule(Connection con){
+	int empId;
+	addAssessmentRule(Connection con,int empId){
+		this.empId=empId;
 		System.out.println("Staff entering the assesment rule");
 		this.conn = con;
 	}
@@ -14,7 +16,7 @@ public class addAssessmentRule {
 		ArrayList<String> symptoms = new ArrayList<String>();
 		
 		patientCheckIn pci = new patientCheckIn(conn);
-		
+		while(true) {
 		Scanner input = new Scanner(System.in);
 		
 		Statement stmt = conn.createStatement();
@@ -27,52 +29,51 @@ public class addAssessmentRule {
 		int i = 1;
 		for(i = 1; i<= symptoms.size(); i++) {
 			System.out.print(i);
-			System.out.println(". " + symptoms[i-1]);
+			System.out.println(". " + symptoms.get(i-1));
 		}
-		System.out.println(i++);
-		System.out.println(". other");
 		
-		System.out.println(i);
-		System.out.println(". Done");
+		if(i==symptoms.size())
+			System.out.println("enter the priority");
+	
 		
 		System.out.println("Please enter your choice no: ");
 		
 		int choice = input.nextInt();
-		
-		if(choice == symptoms.size() + 1 ){
-			// I think not needed but review later.
-		}
-		else if(choice >= 1 && choice <= symptoms.size()) {
+	
+	     if(choice >= 1 && choice < symptoms.size()) {
 			
 			//---> should display the appropriate severity scale for user to enter proper value
 		}
 		
+	     else if(choice==symptoms.size()) {
+	    		System.out.println("1. High");
+	    		System.out.println("2. Normal");
+	    		System.out.println("3. Quarantine");
+	    		
+	    		System.out.println("Enter your choice to fill : ");		
+	    		choice = input.nextInt();
+	     
 		
-		
-		System.out.println("1. High");
-		System.out.println("2. Normal");
-		System.out.println("3. Quarantine");
-		
-		System.out.println("Enter your choice to fill : ");		
-		choice = input.nextInt();
+	
 		
 		switch(choice) {
-		
+		//add the assessement to assessment table
 		case 1:
 		{
-			break;
+			return;
 		}
 		case 2:
 		{
-			break;
+			return;
 		}
 		case 3:
 		{
-			break;
+			return;
 		}
 		default:
 		{
 			System.out.println("Please enter valid choice");
+		}
 		}
 		}
 		

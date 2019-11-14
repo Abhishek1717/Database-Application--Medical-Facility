@@ -12,33 +12,11 @@ public class patientRouting {
 	}
 	public void checkIn(int patientID,int FacilityId) {
 		
-		//get list of facilities
-/////////////////list of facility ID's has to be displayed here..Select statement
-		Statement stmt;
-
-		ResultSet rs;
-		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery("Select NAME from Medical_Facility");
-			int i=0;
-			List<String> fac= new ArrayList<String>();
-			while(rs.next()) {
-				String x;
-				x = rs.getString("NAME");
-				System.out.println(i + " " + x) ;
-				fac.add(x);
-				i++;
+	
 		
-		
-			}
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			int faciltiy=sc.nextInt();
-			
 	
 	    
-		//////////// sending(fac.get(facility),patientId); if the patient is already checked in that facility display error message
+	
 			int x = -1; //if no error set it to true and proceed to check in
 			String sql ="CALL Check_LoginSession(?,?,?)"; 
 	    	CallableStatement cstmt;
@@ -76,7 +54,41 @@ public class patientRouting {
 
 		
 	
-	public void checkIn_Ack(int patientID,int FacilityId) {
+	public void checkIn_Ack(int patientID) {
+		Statement stmt;
+		HashMap<Integer,String> fac= new HashMap<Integer,String>();
+		ResultSet rs;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("Select NAME,FACILITYID from Medical_Facility");
+			int i=0;
+			
+			while(rs.next()) {
+				String x;
+				x = rs.getString("NAME");
+				int y=rs.getInt("FACILITYID");
+				fac.put(y,x);
+				System.out.println(y + " " + x) ;
+				i++;
+		
+		
+			}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		int choice=0;
+		while(true)
+		{System.out.println("Enter  the facilityID  you want to checkin or checkout");
+	     choice=sc.nextInt();
+	    if(fac.containsKey(choice))
+	    {   break;
+	    	}
+	    else {
+	    	System.out.println("Enter  correct Facilityid");
+	    }
+	    
+	    }
+		int FacilityId=choice;
 		System.out.println("1-->CheckIn");
 		System.out.println("2-->Check-out-Acknowledgement");
 		System.out.println("3-->Go Back");
