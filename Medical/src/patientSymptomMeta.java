@@ -27,7 +27,7 @@ public class patientSymptomMeta {
 			System.out.println("  Enter the  Body Part");
 			Statement stmt = conn.createStatement();
 			Map<Integer, String> bodyCodes = new HashMap<>();
-			ResultSet rs = stmt.executeQuery("SELECT NAME from BODY_PART");
+			ResultSet rs = stmt.executeQuery("SELECT NAME, BODYPARTCODE from BODY_PART");
 			int i=0;
 			while(rs.next()) {
 				bodyCodes.put(i, rs.getString("BODYPARTCODE"));
@@ -41,7 +41,7 @@ public class patientSymptomMeta {
 			System.out.println("Enter your choice: ");
 			int choice = input.nextInt();
 			
-			////// send bodyCodes.get(option) to update in the symptom meta data
+			////// send bodyCodes.get(choice) to update in the symptom meta data
 			////// include a new attribute named bpCode
 			
 		}
