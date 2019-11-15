@@ -14,7 +14,7 @@ public class addSeverityScale {
 	
 	public void displayMenu() {
 		
-		List<String> scale= new ArrayList<String>();
+		String newscale="";
 		while(true) {
 			
 		System.out.println("Enter your choice to fill : ");	
@@ -30,12 +30,28 @@ public class addSeverityScale {
 		
 		case 1:
 		{    System.out.println("Enter the level");
-		     String  newscale = input.nextLine();
-			 scale.add(newscale);
+		       
+		       newscale+=input.nextLine();
+		       newscale += ",";
+			
 			break;
 		}
 		case 2:
-		{   /// send the scale details to sql and add in table
+		{   
+
+			String sql ="CALL AddSeverityScale(?)"; 
+	    	CallableStatement cstmt;
+			try {
+				cstmt = conn.prepareCall(sql);
+		    	cstmt.setString(1, newscale);
+
+		    	cstmt.executeQuery();
+		    	} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 			System.out.println("Back to Staff Menu Page");
 			input.close();
 			return;
