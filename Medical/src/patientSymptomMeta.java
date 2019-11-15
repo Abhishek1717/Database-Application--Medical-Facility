@@ -41,14 +41,10 @@ public class patientSymptomMeta {
 			System.out.println("Enter your choice: ");
 			int choice = input.nextInt();
 			
-<<<<<<< HEAD
-			////// send bodyCodes.get(choice) to update in the symptom meta data
-=======
 			
 			    bpCode=bodyCodes.get(choice) ;
 			    
 			////// send bodyCodes.get(option) to update in the symptom meta data
->>>>>>> 98b359f557e073f2a202f1d2c9607742648dbc87
 			////// include a new attribute named bpCode
 			
 		}
