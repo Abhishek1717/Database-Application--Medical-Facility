@@ -40,20 +40,13 @@ public class staffEnterVital {
 		     System.out.println("C. Diastolic Blood Pressure: ");
 		     this.diastolic = input.nextInt();
 		     priority= "low" ;    //change this
-<<<<<<< HEAD
 		     
 		     
 		     ////////store the end time and display  the priority and trigger the assessment
 		     
 		     
 		     ///////////////////////////////////CHANGE CHANGE CHANGE ////////////////////////////////////////
-=======
-		     //store the end time and display the priority and 
-		     
-		     
-		     //////////trigger the assessment****************************
->>>>>>> 98b359f557e073f2a202f1d2c9607742648dbc87
-		     
+
 		     String sql ="CALL Patient_InitialCheckin(?,?,?,?,?,?)"; 
 		    	CallableStatement cstmt;
 				try {
