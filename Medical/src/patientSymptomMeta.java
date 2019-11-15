@@ -8,7 +8,7 @@ public class patientSymptomMeta {
 	String bpCode="";
 	int duration=0;
 	boolean recurring;
-	int severity=0;
+	String severity="";
 	String incident="";
 	String SymptomCode="";
 		
@@ -34,14 +34,21 @@ public class patientSymptomMeta {
 				String x = rs.getString("NAME");
 				System.out.print(i) ;
 				System.out.println(". " + x) ;
-				// Insert into table 
+				// Insert into table the body part
 				i++;	
 			}
 			
 			System.out.println("Enter your choice: ");
 			int choice = input.nextInt();
 			
+<<<<<<< HEAD
 			////// send bodyCodes.get(choice) to update in the symptom meta data
+=======
+			
+			    bpCode=bodyCodes.get(choice) ;
+			    
+			////// send bodyCodes.get(option) to update in the symptom meta data
+>>>>>>> 98b359f557e073f2a202f1d2c9607742648dbc87
 			////// include a new attribute named bpCode
 			
 		}
@@ -52,22 +59,39 @@ public class patientSymptomMeta {
 		String option = input.nextLine();
 		this.recurring = (option == "Y" || option == "y")  ? true : false;
 		System.out.println(" Severity");
-		// show the severity scale for this and take the suitable input as suitable
 		
-		System.out.println(" Incident");
+		
+		// show the severity scale for this and take the suitable input as suitable
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet temp = stmt.executeQuery("SELECT Scale FROM SeverityScale,Symptoms WHERE Symptoms.code = " + SymptomCode +"and Symptoms.scaleId= Severityscale.scaleId" );
+			String sName = temp.getString("scale");
+			System.out.println("Select a severity from "+sName);
+			severity=input.nextLine();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	       
+	   
+		
+		System.out.println("Cause Incident");
 		this.incident = input.nextLine();
 		
 		//// pass a SQL query along with the values
-		String sql ="CALL Patient_Checkin(?,?,?,?,?,?,?)"; 
+		String sql ="CALL Patient_Checkin(?,?,?,?,?,?,?,?)"; 
     	CallableStatement cstmt;
 		try {
 			cstmt = conn.prepareCall(sql);
+			
 			cstmt.setString(1,SymptomCode);
 	    	cstmt.setInt(2,duration);
 			cstmt.setInt(3,patientID);
-			cstmt.setInt(4,severity);
+			cstmt.setString(4,severity);
 			cstmt.setString(5,incident);
 	    	cstmt.setString(6,option);
+	    	cstmt.setString(7,bpCode);
 	    	cstmt.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

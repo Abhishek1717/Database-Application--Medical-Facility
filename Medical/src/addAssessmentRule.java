@@ -5,6 +5,7 @@ public class addAssessmentRule {
 	
 	Connection conn = null;
 	int empId;
+	int severityscale=0;
 	addAssessmentRule(Connection con,int empId){
 		this.empId=empId;
 		System.out.println("Staff entering the assesment rule");
@@ -13,7 +14,7 @@ public class addAssessmentRule {
 	
 	public void listMenuOrder() throws SQLException {
 		
-		ArrayList<String> symptoms = new ArrayList<String>();
+		Map<Integer, String> symCodes = new HashMap<>();
 		
 		patientCheckIn pci = new patientCheckIn(conn);
 		while(true) {
@@ -21,43 +22,48 @@ public class addAssessmentRule {
 		
 		Statement stmt = conn.createStatement();
 		
-		ResultSet rs = stmt.executeQuery("SELECT NAME from SYMPTOMS");
+		ResultSet rs = stmt.executeQuery("SELECT NAME,sym_code from SYMPTOMS");
+		int j=0;
 		while(rs.next()) {
 			String sym = rs.getString("NAME");
-			symptoms.add(sym);
-		}
-		int i = 1;
-		for(i = 1; i<= symptoms.size(); i++) {
-			System.out.print(i);
-			System.out.println(". " + symptoms.get(i-1));
+			String symcode = rs.getString("sym_code");
+			symCodes.put(j,symcode);
+			j++;
+			System.out.print(j);
+			System.out.println(". " + sym);
 		}
 		
-		if(i==symptoms.size())
-			System.out.println("enter the priority");
+		    j++;
+			System.out.println(j+ ".enter the priority");
 	
 		
 		System.out.println("Please enter your choice no: ");
 		
 		int choice = input.nextInt();
-	
-	     if(choice >= 1 && choice < symptoms.size()) {
-			
-			//---> should display the appropriate severity scale for user to enter proper value
+	    String Scode=symCodes.get(choice) ;
+	     if(choice >= 1 && choice < j-1) {
+	    	 
+	    	    
+				ResultSet temp = stmt.executeQuery("SELECT Scale FROM SeverityScale,Symptoms WHERE Symptoms.code = " + Scode +"and Symptoms.scaleId= Severityscale.scaleId" );
+				String sName = temp.getString("scale");
+				System.out.println("Select a severity from "+sName);
+				String severity=input.nextLine();
+				//---> should display the appropriate severity scale for user to enter proper value
 		}
 		
-	     else if(choice==symptoms.size()) {
+	     else if(choice==j) {
 	    		System.out.println("1. High");
 	    		System.out.println("2. Normal");
 	    		System.out.println("3. Quarantine");
 	    		
 	    		System.out.println("Enter your choice to fill : ");		
 	    		choice = input.nextInt();
-	     
+	     }
 		
 	
 		
 		switch(choice) {
-		//add the assessement to assessment table
+		//add the assessment to assessment table
 		case 1:
 		{
 			return;
@@ -75,9 +81,10 @@ public class addAssessmentRule {
 			System.out.println("Please enter valid choice");
 		}
 		}
+		
 		}
 		
-		input.close();
+		
 		
 		//---> go back to staff menu
 	}

@@ -4,8 +4,11 @@ import java.sql.*;
 public class patientReport {
 	
 	Connection conn = null;
-
-	public patientReport(Connection con) {
+    int patientId;
+    int facilityId;
+	public patientReport(Connection con,int patientId,int FacilityId) {
+		this.patientId=patientId;
+		this.facilityId=FacilityId;
 		System.out.println("This is the Staff-Patient Report");
 		this.conn = con;
 	}
@@ -58,7 +61,7 @@ public class patientReport {
 			}
 			case 6:
 			{	
-				staffPatientReportConfirmation sprc = new staffPatientReportConfirmation(conn,);
+				staffPatientReportConfirmation sprc = new staffPatientReportConfirmation(conn,patientId,facilityId);
 				status = sprc.displayMenu();
 				break;
 			}
