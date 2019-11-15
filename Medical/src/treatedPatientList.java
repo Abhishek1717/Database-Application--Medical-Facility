@@ -5,6 +5,7 @@ public class treatedPatientList {
 	
 	Connection conn;
 	int facilityId;
+	int patientChoice;
 	public treatedPatientList(Connection con, int facId,int empId) {
 		System.out.println("List of Treated patients\n");
 		this.conn = con;
@@ -38,7 +39,7 @@ public class treatedPatientList {
 		
 		System.out.println("Please enter your patient Id no: ");
 		
-		int patientChoice = input.nextInt();
+		 patientChoice = input.nextInt();
 		/////////Do something with this /////////
 		//after staff choose what patient display the below menu
 		
@@ -53,7 +54,7 @@ public class treatedPatientList {
 			
 			case 1:
 			{
-				patientReport pr = new patientReport(conn);
+				patientReport pr = new patientReport(conn,patientChoice, facilityId);
 				status = pr.displayMenu();
 				break;
 			}

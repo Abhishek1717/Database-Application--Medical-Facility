@@ -70,7 +70,7 @@ public class staffProcessPatient {
 			}
 			catch(SQLException e1 ){
 				e1.printStackTrace();
-			}/// get primary departmetn and secondary dep of this user if it is same push patient to treated list
+			}/// get primary department and secondary dep of this user if it is same push patient to treated list
 				
 		   if() {}
 		   else {

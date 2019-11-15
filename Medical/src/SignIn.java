@@ -59,8 +59,10 @@ public class SignIn {
 			
 			System.out.println("C.Date of Birth(yyyy-mm-dd");
 			String date = input.nextLine();
-			
+			    try {
 				dob = Date.valueOf(date);
+			    }
+			    catch(Exception e) {}
 			
 			
 			System.out.println("D.City");
@@ -104,9 +106,11 @@ public class SignIn {
 			
 			System.out.println("C.Date of Birth(yyyy-mm-dd");
 			String date = input.nextLine();
-			
+			    
+			try {
 				dob = Date.valueOf(date);
-			
+			}
+			catch(Exception e) {}
 			
 			System.out.println("D.City");
 			this.city = input.nextLine();
@@ -134,9 +138,9 @@ public class SignIn {
 		    
 					Statement stmt = conn.createStatement();
 					
-					ResultSet rs = stmt.executeQuery("SELECT FACILITY_ID From Works where Employee_ID = " +empId );
-					
-						 facilityId = rs.getInt("FACILITYID");
+					ResultSet rs = stmt.executeQuery("SELECT FACILITY_ID From Works where EMPLOYEE_ID = " + empId );
+					     while(rs.next())
+						 facilityId = rs.getInt("FACILITY_ID");
 					
 						
 					
@@ -144,7 +148,7 @@ public class SignIn {
 				
 		    	}
 		    	staffMenu sm= new staffMenu(conn, empId, facilityId);
-		    	
+		    	sm.displayMenu();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

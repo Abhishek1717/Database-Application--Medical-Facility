@@ -11,19 +11,23 @@ public class staffMenu {
 		this.conn = con;
 		this.empId = eId;
 		this.facilityId = facId;
-		try {
-			Statement stmt = conn.createStatement();
-			ResultSet temp = stmt.executeQuery("SELECT STAFF_NAME FROM MEDICAL_STAFF WHERE EMPLOYEE_ID == " + empId);
-			String sName = temp.getString("STAFF_NAME");
-			System.out.println("This is the Staff menu of " + sName);
-		} catch (SQLException e) {
-			System.out.println("Incorrect Sign in");
-			e.printStackTrace();
-		}
+		
 	}
 	
 	public void displayMenu() {
 		
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet temp = stmt.executeQuery("SELECT STAFF_NAME FROM MEDICAL_STAFF WHERE EMPLOYEE_ID = " + empId);
+			String sname="";
+			while(temp.next())
+				 sname = temp.getString("STAFF_NAME");
+			System.out.println("This is the Staff menu of " + sname);
+		} catch (SQLException e) {
+			System.out.println("Incorrect Sign in");
+			e.printStackTrace();
+		}
+		while(true) {
 		System.out.println("1. Checked In Patient List");
 		System.out.println("2. Treated Patient List ");
 		System.out.println("3. Add symptoms");
@@ -35,7 +39,7 @@ public class staffMenu {
 		System.out.println("Enter your choice to fill : ");
 		
 		int choice = input.nextInt();
-		while(true) {
+		
 		switch(choice) {
 		
 		case 1:
@@ -53,11 +57,13 @@ public class staffMenu {
 		case 3:
 		{
 			addSymptoms as = new addSymptoms(conn,empId); 
+			as.listMenu();
 			break;
 		}
 		case 4:
 		{
 			addSeverityScale  adSeverity = new addSeverityScale(conn,empId);
+			adSeverity.displayMenu();
 			break;
 		}
 		case 5:
