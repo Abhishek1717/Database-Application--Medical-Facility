@@ -24,37 +24,36 @@ public class dischargeStatus {
 		
 		Scanner input = new Scanner(System.in); 
 		String discharge="";
-		System.out.println("Enter your choice to fill : ");		
-		int choice = input.nextInt();
+		while(true) {
+			System.out.println("Enter your choice to fill : ");		
+			int choice = input.nextInt();
+			
+			switch(choice) {
+			
+			case 1:
+			{
+				return "Successful Treatment";
+			}
+			case 2:
+			{
+				return "Deceased";
+			}
+			case 3:
+			{
+				return "Referred";
+			}
+			case 4:
+			{
+			    return discharge;
+			  
+			}
+			default:
+			{
+				System.out.println("Please enter valid choice");
+			}
+			}
+		}
 		
-		switch(choice) {
-		
-		case 1:
-		{
-			return "Successful Treatment";
-		}
-		case 2:
-		{
-			return "Deceased";
-		}
-		case 3:
-		{
-			return "Referred";
-		}
-		case 4:
-		{
-		    return discharge;
-		  
-		}
-		default:
-		{
-			System.out.println("Please enter valid choice");
-		}
-		}
-		
-		
-		input.close();
-		return discharge;
 	}
 
 }

@@ -2,7 +2,8 @@ import java.util.*;
 import java.sql.*;
 
 public class referralStatus {
-	int facilityId,ReferrerId;
+	int facilityId = -1;
+	int ReferrerId = -1;
 	String reason;
 	Connection conn = null;
 	public referralStatus(Connection con) {
@@ -13,10 +14,8 @@ public class referralStatus {
 	
 	public void displayMenu() {
 		
-		
-		int i=0;
 		Scanner input = new Scanner(System.in); 
-		while(i<3)
+		while(true)
 		{
 		System.out.println("1. Facility ID");
 		System.out.println("2. Referrer ID");
@@ -35,21 +34,19 @@ public class referralStatus {
 		{
 			System.out.println("Enter Facility ID");
 			facilityId=input.nextInt();
-			i++;
+			
 			break;
 		}
 		case 2:
 		{   
 			System.out.println("Enter Referrer ID");
 			ReferrerId=input.nextInt();
-			i++;
 			break;
 		}
 		case 3:
 		{   
 			referralReason rr= new referralReason(conn);
 			rr.displayMenu();
-			i++;
 			break;
 		}
 		case 4:
@@ -64,8 +61,6 @@ public class referralStatus {
 		}
 		
 	}
-		
-		input.close();
 	}
 
 }

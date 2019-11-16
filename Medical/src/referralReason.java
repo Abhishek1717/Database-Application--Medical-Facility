@@ -38,7 +38,7 @@ public class referralReason {
 		}
 		case 2:
 		{    System.out.println(" Enter description");
-			 Description=input.nextLine();
+			 Description = input.nextLine();
 			
 			break;
 		}
@@ -50,7 +50,11 @@ public class referralReason {
 			break;
 		}
 		case 4:
-		{   /// call procedure to insert into reasons table.
+		{   
+			/// call procedure to insert into reasons table.
+			///// using serviceName, Description, reason parameters
+			
+			
 			return;
 		}
 		default:
