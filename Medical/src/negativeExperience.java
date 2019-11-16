@@ -31,6 +31,8 @@ public class negativeExperience {
 			NegativeCode=input.nextInt();
 			System.out.println("Enter Description");
 			Description=input.nextLine();
+			
+			/// add this to experience table...
 			return;
 		}
 		case 2:

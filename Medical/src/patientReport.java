@@ -45,7 +45,10 @@ public class patientReport {
 			}
 			case 3:
 			{
-				//SQL statement to update(include a default value) into the treatment_given field of Experience
+				System.out.println("enter treatment description");  //SQL statement to update(include a default value) into the treatment_given field of Experience
+				String treatment=input.nextLine();
+				
+				// add treatment to table
 				break;
 			}
 			case 4:

@@ -24,7 +24,7 @@ public class treatedPatientList {
 		try {
 			Statement stmt = conn.createStatement();
 			
-			ResultSet rs = stmt.executeQuery("SELECT PATIENT_ID from MEDICAL_FACILITY where FACILITY_ID = " + facilityId);
+			ResultSet rs = stmt.executeQuery("SELECT PatientId From TreatedPatient as tp where tp.FACILITY_ID = " + facilityId);
 			while(rs.next()) {
 				int patId = rs.getInt("PATIENT_ID");
 				ResultSet temp = stmt.executeQuery("select FIRST_NAME, LAST_NAME from PATIENT where PATIENT_ID = " + patId);

@@ -1,11 +1,12 @@
 import java.util.*;
 import java.sql.*;
+import java.sql.Date;
 
 public class staffProcessPatient {
 	Connection conn = null;
 	int facilityId;
 	int empId;
-	
+	int patientchoice;
 	staffProcessPatient(Connection con,int facId,int empid){
 		this.conn = con;
 		this.facilityId=facId;
@@ -47,6 +48,7 @@ public class staffProcessPatient {
 				while(rs.next()) {
 					System.out.println(rs.getInt("PATIENT_ID") + ". " + rs.getString("LAST_NAME") + ", " + rs.getString("FIRST_NAME"));
 				}
+				///treated patient list.....
 				
 			}
 			catch(SQLException e1 ){
@@ -57,7 +59,7 @@ public class staffProcessPatient {
 			
 	        System.out.println("Please enter your patient Id no: ");
 			
-			int patientChoice = input.nextInt();
+			 patientchoice = input.nextInt();
 			
 			
 			System.out.println("1. Enter Vitals");
@@ -70,7 +72,7 @@ public class staffProcessPatient {
 			
 			case 1:
 			{   
-				staffEnterVital sev= new staffEnterVital(conn, patientChoice);
+				staffEnterVital sev= new staffEnterVital(conn, patientchoice);
 				sev.listMenu();
 				break;
 			}
@@ -78,9 +80,31 @@ public class staffProcessPatient {
 			{
 				/// inputs : patientId, EmpId, Facility ID
 				/// SQL PROCEDURE to check if staff has specialization in some body part of symptom of patient
-			   int ret = 0;
+				//if that is true move patient to treated list.
+				String sql ="CALL MedicalStaffValidation(?,?,?,?)"; 
+		    	CallableStatement cstmt;
+		    	int ret=0;
+				try {
+					cstmt = conn.prepareCall(sql);
+					
+			    	cstmt.setInt(1, empId);
+			    	cstmt.setInt(2, patientchoice);
+			    	cstmt.setInt(3, facilityId);
+			    
+			    	cstmt.registerOutParameter(4, Types.INTEGER);
+			    	
+			    	
+			    	cstmt.executeQuery();
+			    	
+			    	ret=cstmt.getInt(4);
+			    	
+			    	} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			   //// will be done in the same procedure
 			   if(ret == 1) {
-				   
+				   System.out.println("Patient treated..");
 			   }
 			   else {
 			   System.out.println("inadequate privilege");

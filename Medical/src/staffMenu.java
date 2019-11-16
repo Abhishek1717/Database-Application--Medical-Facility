@@ -49,6 +49,7 @@ public class staffMenu {
 		case 1:
 		{
 		 staffProcessPatient spp= new staffProcessPatient(conn,facilityId,empId);
+		 spp.listMenu();
 		break;
 		}
 		case 2:
@@ -72,6 +73,12 @@ public class staffMenu {
 		}
 		case 5:
 		{   addAssessmentRule aar = new  addAssessmentRule(conn,empId);
+		      try {
+				aar.listMenuOrder();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		}
 		case 6:
