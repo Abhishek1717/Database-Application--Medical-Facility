@@ -13,6 +13,8 @@ public class firstExample {
 	    // and calls the registerDriver method to make Oracle Thin
 	    // driver available to clients.
 
+        	
+        	
             Class.forName("oracle.jdbc.driver.OracleDriver");
 
 	    String user = "skmuppal";	     // For example, "jsmith"
@@ -22,7 +24,9 @@ public class firstExample {
             Connection conn = null;
             Statement stmt = null;
             ResultSet rs = null;
-
+          
+            
+            
             try {
 
 		// Get a connection from the first driver in the

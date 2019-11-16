@@ -6,7 +6,7 @@ public class patientCheckIn {
 	
 	List<String> symptoms = new ArrayList<String>();                 ///// make this a 2d array to include symptom meta data
 	Connection conn = null; 
-	
+	String bodyPart= "-1";
 	
 	public patientCheckIn(Connection con) {
 		System.out.println("This is the Patient Check-In page.");
@@ -43,7 +43,8 @@ public class patientCheckIn {
 			
 			if (choice == symptoms.size() + 2) {
 				////  /// rcall procedure checkin.patient_intialcheckin
-				input.close(); 
+				///// check this
+				firstExample.main(null);
 				return;                                                  
 			}
 			/*else if(choice == symptoms.size() + 1 ){
@@ -58,7 +59,7 @@ public class patientCheckIn {
 			else if(choice >= 1 && choice <= symptoms.size()) {
 
 				patientSymptomMeta psm=new patientSymptomMeta(conn, symCodes.get(choice));
-				String bodyPart= "-1";
+				
 				/// if body trigger==null then pass -1 otherwise pass the body part id
 				String sql ="CALL RetrieveBodyPart_Symptom(?,?)"; 
 		    	CallableStatement cstmt;
@@ -76,7 +77,7 @@ public class patientCheckIn {
 				}
 
 
-				psm.showAllOptions(bodyPart, PatientID);
+				psm.showAllOptions(conn,bodyPart, PatientID);
 			}
 	
 		}

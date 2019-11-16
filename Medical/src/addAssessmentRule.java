@@ -143,7 +143,6 @@ public class addAssessmentRule {
 		}
 		
 		
-		input.close();
 		//---> go back to staff menu
 	}
 }

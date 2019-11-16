@@ -41,7 +41,7 @@ public class addSeverityScale {
 		}
 		case 2:
 		{   
-
+     
 			String sql ="CALL AddSeverityScale(?)"; 
 	    	CallableStatement cstmt;
 			try {
@@ -56,7 +56,7 @@ public class addSeverityScale {
 			
 			
 			System.out.println("Back to Staff Menu Page");
-			input.close();
+		
 			return;
 		}
 		default:

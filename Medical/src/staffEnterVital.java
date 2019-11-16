@@ -56,10 +56,12 @@ public class staffEnterVital {
 				int checkinId = stmt.executeQuery("select CHECKIN_ID from LOG_IN  where PATIENT_ID = " + patientId + "and FACILITY_ID = " + facilityId ).getInt("CHECKIN_ID");
 				
 				for(int i = 1; i<= maxId; i++) {
+
 					
 					Boolean thisRule = true;
 					rs = stmt.executeQuery("select SYMPTOMCODE, SEVERITY, PRIORITY from ASSESSMENTRULES where ASSESSMENTID = " + i);
 					
+
 					while(rs.next()) {
 						
 						ResultSet loop = stmt.executeQuery("select SEVERITY from SYMPTOMMETADATA where PATIENTID = " 

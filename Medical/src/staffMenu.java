@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.IOException;
 import java.sql.*;
 
 public class staffMenu {
@@ -26,8 +27,8 @@ public class staffMenu {
 		} catch (SQLException e) {
 			System.out.println("Incorrect Sign in");
 			e.printStackTrace();
-		}
-		Scanner input = new Scanner(System.in);
+		}   
+		
 		int choice;
 		while(true) {
 		System.out.println("1. Checked In Patient List");
@@ -39,10 +40,10 @@ public class staffMenu {
 		
 		
 		System.out.println("Enter your choice to fill : ");
-		 if(!input.hasNext())
-			 input.nextLine();
-
-		choice = input.nextInt();
+	
+		 Scanner input = new Scanner(System.in);
+		 
+		 choice = input.nextInt();
 		
 		switch(choice) {
 		
