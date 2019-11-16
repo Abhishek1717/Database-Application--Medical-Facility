@@ -29,7 +29,7 @@ public class addSymptoms {
 		try {
 			stmt = conn.createStatement();
 			Map<Integer, String> bodyCodes = new HashMap<>();
-			ResultSet rs1 = stmt.executeQuery("SELECT NAME from BODY_PART");
+			ResultSet rs1 = stmt.executeQuery("SELECT BODYPARTCODE,NAME from BODY_PART");
 			int i=0;
 			while(rs1.next()) {
 				bodyCodes.put(i, rs1.getString("BODYPARTCODE"));
@@ -55,12 +55,12 @@ public class addSymptoms {
 		try {
 			stmt = conn.createStatement();
 			Map<Integer, String> scales = new HashMap<>();
-			ResultSet rs = stmt.executeQuery("SELECT severityscale,severityID, NAME from severity");
+			ResultSet rs = stmt.executeQuery("SELECT scale,scaleID from severityscale");
 			
 			while(rs.next()) {
 				
-				int x = rs.getInt("severityID");
-				String y=rs.getString("severityscale");
+				int x = rs.getInt("scaleID");
+				String y=rs.getString("scale");
 				 scales.put(x,y);
 				System.out.print(x);
 				System.out.println(". ") ;

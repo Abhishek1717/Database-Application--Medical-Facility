@@ -16,13 +16,14 @@ public class staffProcessPatient {
 		while(true) {
 		///// need to display the patient list 
 			
-	
+
+			
 	///// need to verify whether this user is medical staff ..
 		try {
 			Statement stmt = conn.createStatement();
 			int patId=0;
 			ResultSet rs = stmt.executeQuery("SELECT EmployeeId From Medical_staff where EMPLOYEE_ID = " + empid + "UNION SELECT deptID from SecondaryDepartment Where EmployeeID="+ empid );
-			
+			///MEDICALSTAFF VALIDATION
 				patId = rs.getInt("EmployeeId");
 				
 			if(patId==0)

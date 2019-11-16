@@ -15,7 +15,7 @@ public class treatedPatientList {
 	public void ListAllPatients() {
 		
 		// ---> sql statement to retrieve all treated patients and list them out
-		// have to find only treated patient list.
+		/////// have to find only treated patient list.
 		ArrayList<String> patients = new ArrayList<String>();
 		
 		Scanner input = new Scanner(System.in);

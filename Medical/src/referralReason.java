@@ -18,14 +18,14 @@ public class referralReason {
 		//and description
 		int i=0;
 		Scanner input = new Scanner(System.in); 
-		while(i<3)
-		{
+	
 		System.out.println("1. Name of Service");
 		System.out.println("2. Description");
 		System.out.println("3. Record Reason");
 		System.out.println("4. Go Back");
 		
-		
+		while(i<3)
+		{
 		System.out.println("Enter your choice to fill : ");		
 		int choice = input.nextInt();
 		

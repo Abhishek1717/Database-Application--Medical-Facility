@@ -42,6 +42,25 @@ public class patientRouting {
 		if(x==0) {
 			patientCheckIn pci=new patientCheckIn(conn);
 			try {
+			/// add patient_intial_checkin
+				String sql1 ="CALL Patient_IntialCheckin(?,?)"; 
+		    	
+				try {
+					cstmt = conn.prepareCall(sql1);
+				
+			    	cstmt.setInt(1, patientID);
+			    	cstmt.setInt(2, FacilityId);
+			    	
+			    	
+			    	cstmt.executeQuery();
+			    	
+			    	
+
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(x==0)
 				pci.symptomMenu(patientID);
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -60,13 +79,13 @@ public class patientRouting {
 		ResultSet rs;
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("Select NAME,FACILITYID from Medical_Facility");
+			rs = stmt.executeQuery("Select NAME,FACILITY_ID from Medical_Facility");
 			int i=0;
 			
 			while(rs.next()) {
 				String x;
 				x = rs.getString("NAME");
-				int y=rs.getInt("FACILITYID");
+				int y=rs.getInt("FACILITY_ID");
 				fac.put(y,x);
 				System.out.println(y + " " + x) ;
 				i++;
