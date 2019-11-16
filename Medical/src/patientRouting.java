@@ -79,7 +79,9 @@ public class patientRouting {
 		ResultSet rs;
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("Select NAME,FACILITY_ID from Medical_Facility");
+
+			rs = stmt.executeQuery("Select NAME, FACILITY_ID from MEDICAL_FACILITY");
+
 			int i=0;
 			
 			while(rs.next()) {
@@ -89,21 +91,21 @@ public class patientRouting {
 				fac.put(y,x);
 				System.out.println(y + " " + x) ;
 				i++;
-		
-		
 			}
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
 		int choice=0;
-		while(true)
-		{System.out.println("Enter  the facilityID  you want to checkin or checkout");
-	     choice=sc.nextInt();
+		while(true){
+			
+			System.out.println("Enter  the facilityID  you want to checkin to / checkout from");
+			choice=sc.nextInt();
+			System.out.println("Check 1");
 	    if(fac.containsKey(choice))
 	    {   break;
 	    	}
 	    else {
-	    	System.out.println("Enter  correct Facilityid");
+	    	System.out.println("Enter  correct Facility id");
 	    }
 	    
 	    }

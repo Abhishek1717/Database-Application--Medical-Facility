@@ -27,7 +27,9 @@ public class patientSymptomMeta {
 			System.out.println("  Enter the  Body Part");
 			
 			Map<Integer, String> bodyCodes = new HashMap<>();
+
 			ResultSet rs = stmt.executeQuery("SELECT NAME,BODYPARTCODE from BODY_PART");
+
 			int i=0;
 			while(rs.next()) {
 				bodyCodes.put(i, rs.getString("BODYPARTCODE"));

@@ -8,13 +8,16 @@ public class staffEnterVital {
 	int temperature;
 	int systolic;
 	int diastolic;
+	
+	int patientId;
 	String priority;
 	
-	staffEnterVital(Connection con){
+	staffEnterVital(Connection con, int patId){
 		this.conn = con;
 		System.out.println("Please enter the patient's vitals before proceeding.\n ");
+		this.patientId = patId;
 	}
-	public void listMenu(int patientid) {
+	public void listMenu() {
 		
 		Scanner input = new Scanner(System.in);
 		
@@ -37,18 +40,20 @@ public class staffEnterVital {
 		     System.out.println("C. Diastolic Blood Pressure: ");
 		     this.diastolic = input.nextInt();
 		     priority= "low" ;    //change this
-		     //store the end time and display the priority and 
 		     
 		     
-		     //////////trigger the assessment****************************
+		     ////////store the end time and display  the priority and trigger the assessment
 		     
+
+		     ///////////////////////////////////CHANGE CHANGE CHANGE ////////////////////////////////////////
+
 		     String sql ="CALL AddVitals(?,?,?,?,?,?)"; 
 		    	CallableStatement cstmt;
 				try {
 					cstmt = conn.prepareCall(sql);
 					cstmt.setString(1, priority);
 			    	cstmt.setInt(2, temperature);
-			    	cstmt.setInt(3, patientid);
+			    	cstmt.setInt(3, patientId);
 			    	cstmt.setInt(4, systolic);
 			    	cstmt.setInt(5,diastolic);
 			    	
