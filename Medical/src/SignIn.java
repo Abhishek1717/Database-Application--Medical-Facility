@@ -93,7 +93,7 @@ public class SignIn {
 			/////////////////////////////////       validate credentials    ///////////////////////////////////////
 				if(patientID!=-1)
 					{patientRouting pr = new patientRouting(conn);
-			  pr.checkIn_Ack(patientID);}
+			   pr.checkIn_Ack(patientID);}
 			
 			
 		}
@@ -141,14 +141,14 @@ public class SignIn {
 					ResultSet rs = stmt.executeQuery("SELECT FACILITY_ID From Works where EMPLOYEE_ID = " + empId );
 					     while(rs.next())
 						 facilityId = rs.getInt("FACILITY_ID");
-					
-						
+					     staffMenu sm= new staffMenu(conn, empId, facilityId);
+					    	sm.displayMenu();
+	
 					
 					
 				
 		    	}
-		    	staffMenu sm= new staffMenu(conn, empId, facilityId);
-		    	sm.displayMenu();
+		    	
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

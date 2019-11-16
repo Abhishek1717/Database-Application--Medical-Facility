@@ -15,23 +15,26 @@ public class addSeverityScale {
 	public void displayMenu() {
 		
 		String newscale="";
+		Scanner input = new Scanner(System.in); 
 		while(true) {
 			
 		System.out.println("Enter your choice to fill : ");	
 		System.out.println("1.There's another level to this scale");
 		System.out.println("2.There's no more levels, Go Back");
 		
-		Scanner input = new Scanner(System.in); 
+		
 		
 			
 		int choice = input.nextInt();
+		input.nextLine();
 		
 		switch(choice) {
 		
 		case 1:
 		{    System.out.println("Enter the level");
 		       
-		       newscale+=input.nextLine();
+		       String x=input.nextLine();
+		       newscale+=x;
 		       newscale += ",";
 			
 			break;
@@ -62,8 +65,9 @@ public class addSeverityScale {
 		}
 		}
 		
-		input.close();
+		
 		}
+		
 	}
 	
 }

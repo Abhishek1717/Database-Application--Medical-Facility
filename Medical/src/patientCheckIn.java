@@ -29,10 +29,10 @@ public class patientCheckIn {
 			i++;	
 		}
 		
-		System.out.println(i++);
+		System.out.print(i++);
 		System.out.println(". Other");
 		
-		System.out.println(i);
+		System.out.print(i);
 		System.out.println(". Done");
 		Scanner input = new Scanner(System.in);
 		
@@ -67,8 +67,9 @@ public class patientCheckIn {
 					cstmt = conn.prepareCall(sql);
 					cstmt.registerOutParameter(2, java.sql.Types.VARCHAR);
 					cstmt.setString(1, symCodes.get(choice));
-					cstmt.getString(bodyPart);
+					
 			    	cstmt.executeQuery();
+			    	bodyPart=cstmt.getString(2);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

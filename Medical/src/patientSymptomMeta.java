@@ -22,12 +22,14 @@ public class patientSymptomMeta {
 	public void showAllOptions(String bodyPart, int patientID) throws SQLException {
 		
 		Scanner input = new Scanner(System.in);
-		
+		Statement stmt = conn.createStatement();
 		if(bodyPart.equals("-1")) {
 			System.out.println("  Enter the  Body Part");
-			Statement stmt = conn.createStatement();
+			
 			Map<Integer, String> bodyCodes = new HashMap<>();
-			ResultSet rs = stmt.executeQuery("SELECT NAME, BODYPARTCODE from BODY_PART");
+
+			ResultSet rs = stmt.executeQuery("SELECT NAME,BODYPARTCODE from BODY_PART");
+
 			int i=0;
 			while(rs.next()) {
 				bodyCodes.put(i, rs.getString("BODYPARTCODE"));
@@ -49,7 +51,7 @@ public class patientSymptomMeta {
 			
 		}
 		
-		System.out.println(" Enter your Duration?");
+		System.out.println(" Enter your Duration in days?");
 		this.duration =  input.nextInt();
 		System.out.println(" Is it a reoccurence? (Y/n)");
 		String option = input.nextLine();
@@ -59,7 +61,7 @@ public class patientSymptomMeta {
 		
 		// show the severity scale for this and take the suitable input as suitable
 		try {
-			Statement stmt = conn.createStatement();
+			stmt = conn.createStatement();
 			ResultSet temp = stmt.executeQuery("SELECT Scale FROM SeverityScale,Symptoms WHERE Symptoms.code = " + SymptomCode +"and Symptoms.scaleId= Severityscale.scaleId" );
 			String sName = temp.getString("scale");
 			System.out.println("Select a severity from "+sName);

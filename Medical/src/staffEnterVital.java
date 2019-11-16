@@ -70,9 +70,10 @@ public class staffEnterVital {
 				
 			}		     
 		     
+
 		     ///////////////////////////////////CHANGE CHANGE CHANGE ////////////////////////////////////////
 
-		     String sql ="CALL Patient_InitialCheckin(?,?,?,?,?,?)"; 
+		     String sql ="CALL AddVitals(?,?,?,?,?,?)"; 
 		    	CallableStatement cstmt;
 				try {
 					cstmt = conn.prepareCall(sql);

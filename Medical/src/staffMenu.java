@@ -27,6 +27,8 @@ public class staffMenu {
 			System.out.println("Incorrect Sign in");
 			e.printStackTrace();
 		}
+		Scanner input = new Scanner(System.in);
+		int choice;
 		while(true) {
 		System.out.println("1. Checked In Patient List");
 		System.out.println("2. Treated Patient List ");
@@ -35,16 +37,19 @@ public class staffMenu {
 		System.out.println("5. Add assessment rule");
 		System.out.println("6. Go Back");
 		
-		Scanner input = new Scanner(System.in);
-		System.out.println("Enter your choice to fill : ");
 		
-		int choice = input.nextInt();
+		System.out.println("Enter your choice to fill : ");
+		 if(!input.hasNext())
+			 input.nextLine();
+
+		choice = input.nextInt();
 		
 		switch(choice) {
 		
 		case 1:
 		{
 		 staffProcessPatient spp= new staffProcessPatient(conn,facilityId,empId);
+		 spp.listMenu();
 		break;
 		}
 		case 2:
@@ -68,6 +73,12 @@ public class staffMenu {
 		}
 		case 5:
 		{   addAssessmentRule aar = new  addAssessmentRule(conn,empId);
+		      try {
+				aar.listMenuOrder();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		}
 		case 6:

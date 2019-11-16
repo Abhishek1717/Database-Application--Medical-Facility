@@ -17,7 +17,7 @@ public class SignUp {
     	lastName=sc.nextLine();
     	System.out.println("Enter Date of Birth");
     	String date =sc.nextLine();
-    	//SimpleDateFormat format = new SimpleDateFormat("mm-dd-yyyy");
+    
     	this.dob = Date.valueOf(date);
     	System.out.println("Enter Address" );
     	System.out.println("Enter Flat_No" );

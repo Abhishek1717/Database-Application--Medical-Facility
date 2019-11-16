@@ -18,14 +18,14 @@ public class referralReason {
 		//and description
 		int i=0;
 		Scanner input = new Scanner(System.in); 
-		while(i<3)
-		{
+	
 		System.out.println("1. Name of Service");
 		System.out.println("2. Description");
 		System.out.println("3. Record Reason");
 		System.out.println("4. Go Back");
 		
-		
+		while(true)
+		{
 		System.out.println("Enter your choice to fill : ");		
 		int choice = input.nextInt();
 		
@@ -34,13 +34,12 @@ public class referralReason {
 		case 1:
 		{   System.out.println(" Enter Name of Service");
 		    serviceName=input.nextLine();
-		    i++;
 			break;
 		}
 		case 2:
 		{    System.out.println(" Enter description");
 			 Description=input.nextLine();
-			 i++;
+			
 			break;
 		}
 		case 3:
@@ -51,7 +50,7 @@ public class referralReason {
 			break;
 		}
 		case 4:
-		{
+		{   /// call procedure to insert into reasons table.
 			return;
 		}
 		default:
@@ -60,7 +59,7 @@ public class referralReason {
 		}
 		}
 	}
-		input.close();
+	
 		
 	}
 
