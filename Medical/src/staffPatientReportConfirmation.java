@@ -18,9 +18,12 @@ public class staffPatientReportConfirmation {
 		
 		//Display all the information to be given in the report
 		//See the initial pdf for the details, when implementing
+		
+		
+		/////////////////SQL procedure to check if all the report components are done
 		try {
 			Statement stmt = conn.createStatement();
-			int checkinId = stmt.executeQuery("select CHECKIN_ID from LOG_IN where PATIENT_ID = " + patientId + "FACILITY_ID = " + facilityId ).getInt("CHECKIN_ID");
+			int checkinId = stmt.executeQuery("select CHECKIN_ID from LOG_IN,  where PATIENT_ID = " + patientId + "and FACILITY_ID = " + facilityId ).getInt("CHECKIN_ID");
 			ResultSet rs = stmt.executeQuery("Select EXP_ID, DISCHARGESTATUS, REFERRAL_FACILITY_ID, REFERRER_ID, TREATMENTGIVEN,  EXP_CODE, EXP_DESCRIPTION from EXPERIENCE "
 					+ "where PATIENT_ID = " + patientId + " CHECKINID = " + checkinId);
 			int exp_id = rs.getInt("EXP_ID");
