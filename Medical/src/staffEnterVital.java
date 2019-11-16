@@ -39,11 +39,36 @@ public class staffEnterVital {
 		     this.systolic  = input.nextInt();
 		     System.out.println("C. Diastolic Blood Pressure: ");
 		     this.diastolic = input.nextInt();
-		     priority= "low" ;    //change this
+		     priority= "normal" ;    //change this
 		     
 		     
-		     ////////store the end time and display  the priority and trigger the assessment
+		     ///////Calculate and display the priority and trigger the assessment
 		     
+		     try {
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery("select MAX(ASSESSMENTID) from ASSESSMENTRULES");
+				int maxId = 1;
+				while(rs.next()) {
+					maxId = rs.getInt("MAX(ID)");
+				}
+				for(int i = 1; i<= maxId; i++) {
+					bool thisRule = false;
+					rs = stmt.executeQuery("select SYMPTOMCODE, SEVERITY from ASSESSMENTRULES where ASSESSMENTID = " + i);
+					while(rs.next()) {
+						ResultSet loop = stmt.executeQuery("select SEVERITY from SYMPTOMMETADATA where PATIENTID = " 
+					+ patientId + " and SYM_CODE = " + rs.getString("SYMPTOMCODE") + "and CHECKINID = " + checkinid);
+						if(!rs.getString("SEVERITY").equals(loop.getString("SEVERITY"))) {
+							thisRule = false;
+							break;
+						}
+					}
+					if(i == maxId + 1 && thisRule) {
+						priority
+					}
+				}
+			} catch (SQLException e1) {
+				
+			}		     
 		     
 		     ///////////////////////////////////CHANGE CHANGE CHANGE ////////////////////////////////////////
 
