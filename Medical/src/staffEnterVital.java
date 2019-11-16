@@ -10,12 +10,14 @@ public class staffEnterVital {
 	int diastolic;
 	
 	int patientId;
+	int facilityId;
 	String priority;
 	
-	staffEnterVital(Connection con, int patId){
+	staffEnterVital(Connection con, int patId, int facId){
 		this.conn = con;
 		System.out.println("Please enter the patient's vitals before proceeding.\n ");
 		this.patientId = patId;
+		this.facilityId = facId;
 	}
 	public void listMenu() {
 		
@@ -51,20 +53,45 @@ public class staffEnterVital {
 				while(rs.next()) {
 					maxId = rs.getInt("MAX(ID)");
 				}
+				int checkinId = stmt.executeQuery("select CHECKIN_ID from LOG_IN  where PATIENT_ID = " + patientId + "and FACILITY_ID = " + facilityId ).getInt("CHECKIN_ID");
+				
 				for(int i = 1; i<= maxId; i++) {
-					boolean thisRule = false;
-					rs = stmt.executeQuery("select SYMPTOMCODE, SEVERITY from ASSESSMENTRULES where ASSESSMENTID = " + i);
+
+					
+					Boolean thisRule = true;
+					rs = stmt.executeQuery("select SYMPTOMCODE, SEVERITY, PRIORITY from ASSESSMENTRULES where ASSESSMENTID = " + i);
+					
+
 					while(rs.next()) {
+						
 						ResultSet loop = stmt.executeQuery("select SEVERITY from SYMPTOMMETADATA where PATIENTID = " 
-					+ patientId + " and SYM_CODE = " + rs.getString("SYMPTOMCODE") + "and CHECKINID = " + checkinid);
-						if(!rs.getString("SEVERITY").equals(loop.getString("SEVERITY"))) {
+					+ patientId + " and SYM_CODE = " + rs.getString("SYMPTOMCODE") + "and CHECKINID = " + checkinId);
+						
+						String sev = rs.getString("SEVERITY");
+						String patSev = loop.getString("SEVERITY");
+						if(Character.isDigit(sev.charAt(0)) && Character.isDigit(patSev.charAt(0)) ) {
+							int sever = Integer.parseInt(sev);
+							int patSever = Integer.parseInt(patSev);
+							
+							if(!(patSever >= sever)) {
+								thisRule = false;
+								break;
+							}
+						}
+						else if(!sev.equals(patSev)) {
 							thisRule = false;
 							break;
 						}
 					}
-					if(i == maxId + 1 && thisRule) {
-						priority
+					if(thisRule) {
+						priority = rs.getString("PRIORITY");
+						break;
 					}
+					
+					
+					/////////////////SQL PROCEDURE FOR UPDATING PRIORITY in the CHECK_IN table with priority value as above
+					
+					System.out.println("This is the priority of the patient : " + priority);
 				}
 			} catch (SQLException e1) {
 				

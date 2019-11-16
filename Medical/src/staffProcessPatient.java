@@ -72,7 +72,7 @@ public class staffProcessPatient {
 			
 			case 1:
 			{   
-				staffEnterVital sev= new staffEnterVital(conn, patientchoice);
+				staffEnterVital sev= new staffEnterVital(conn, patientchoice, facilityId);
 				sev.listMenu();
 				break;
 			}
