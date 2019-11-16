@@ -52,7 +52,7 @@ public class staffEnterVital {
 					maxId = rs.getInt("MAX(ID)");
 				}
 				for(int i = 1; i<= maxId; i++) {
-					bool thisRule = false;
+					boolean thisRule = false;
 					rs = stmt.executeQuery("select SYMPTOMCODE, SEVERITY from ASSESSMENTRULES where ASSESSMENTID = " + i);
 					while(rs.next()) {
 						ResultSet loop = stmt.executeQuery("select SEVERITY from SYMPTOMMETADATA where PATIENTID = " 

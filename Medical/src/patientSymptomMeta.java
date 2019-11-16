@@ -3,8 +3,8 @@ import java.sql.*;
 
 public class patientSymptomMeta {
 	
-	Connection conn;
-	
+	Connection conn1;
+	Statement stmt;
 	String bpCode="";
 	int duration=0;
 	boolean recurring;
@@ -13,16 +13,26 @@ public class patientSymptomMeta {
 	String SymptomCode="";
 		
 	public patientSymptomMeta(Connection con, String SymptomCode) {
-		this.conn = con;
+		this.conn1 = con;
 		this.SymptomCode=SymptomCode;
 		System.out.println("Please enter the metadata for the symptom");
 		
 	}
 	
-	public void showAllOptions(String bodyPart, int patientID) throws SQLException {
+	public void showAllOptions(Connection conn,String bodyPart, int patientID) throws SQLException {
 		
 		Scanner input = new Scanner(System.in);
-		Statement stmt = conn.createStatement();
+	
+		
+		  
+		  try {
+				stmt = conn.createStatement();
+				
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
 		if(bodyPart.equals("-1")) {
 			System.out.println("  Enter the  Body Part");
 			

@@ -86,7 +86,7 @@ public class addSymptoms {
 		
 		System.out.println("Enter your choice to fill : ");		
 		int choice = input.nextInt();
-		input.close();
+		
 		
 		switch(choice) {
 		
