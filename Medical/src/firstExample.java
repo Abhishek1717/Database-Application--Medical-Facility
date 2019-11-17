@@ -70,13 +70,7 @@ public class firstExample {
 		}
 		
 
-		//rs = stmt.executeQuery("SELECT name FROM MEDICAL_FACILITY");
 
-		// Now rs contains the rows of coffees and prices from
-		// the COFFEES table. To access the data, use the method
-		// NEXT to access all rows in rs, one row at a time
-
-		
 
             }
 		} finally {

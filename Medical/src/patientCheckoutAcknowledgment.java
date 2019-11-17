@@ -99,6 +99,7 @@ public class patientCheckoutAcknowledgment {
 		switch(choice) {
 		
 		case 1:
+			
 		{   return;
 			
 		}
