@@ -32,7 +32,7 @@ public class referralReason {
 		switch(choice) {
 		
 		case 1:
-		{   System.out.println(" Enter Name of Service");
+		{   System.out.println("Enter Name of Service");
 		    serviceName=input.nextLine();
 			break;
 		}

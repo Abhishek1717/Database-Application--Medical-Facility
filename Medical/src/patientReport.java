@@ -6,9 +6,11 @@ public class patientReport {
 	Connection conn = null;
     int patientId;
     int facilityId;
-	public patientReport(Connection con,int patientId,int FacilityId) {
+    int employeeId;
+	public patientReport(Connection con,int patientId,int FacilityId, int empId) {
 		this.patientId=patientId;
 		this.facilityId=FacilityId;
+		this.employeeId = empId;
 		System.out.println("This is the Staff-Patient Report");
 		this.conn = con;
 	}
@@ -53,7 +55,7 @@ public class patientReport {
 			case 2:
 			{
 				if(dStatus.equals("Reffered")) {
-					referralStatus rs = new referralStatus(conn);
+					referralStatus rs = new referralStatus(conn, patientId, facilityId, employeeId);
 					rs.displayMenu();
 					
 				}
@@ -65,8 +67,10 @@ public class patientReport {
 			}
 			case 3:
 			{
-				System.out.println("enter treatment description");  //SQL statement to update(include a default value) into the treatment_given field of Experience
+				System.out.println("enter treatment description");  
+				
 				treatment=input.nextLine();
+				//SQL statement to update(include a default value) into the treatment_given field of Experience
 				
 				// add treatment to table
 				break;

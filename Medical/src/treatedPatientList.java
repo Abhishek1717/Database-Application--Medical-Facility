@@ -6,10 +6,12 @@ public class treatedPatientList {
 	Connection conn;
 	int facilityId;
 	int patientChoice;
+	int employeeId;
 	public treatedPatientList(Connection con, int facId,int empId) {
 		System.out.println("List of Treated patients\n");
 		this.conn = con;
 		this.facilityId = facId;
+		this.employeeId = empId;
 	}
 	
 	public void ListAllPatients() {
@@ -54,7 +56,7 @@ public class treatedPatientList {
 			
 			case 1:
 			{
-				patientReport pr = new patientReport(conn,patientChoice, facilityId);
+				patientReport pr = new patientReport(conn,patientChoice, facilityId, employeeId);
 				status = pr.displayMenu();
 				break;
 			}

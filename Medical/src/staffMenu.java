@@ -8,6 +8,7 @@ public class staffMenu {
 	
 	int empId;
 	int facilityId;
+	
 	staffMenu(Connection con, int facId, int eId){
 		this.conn = con;
 		this.empId = eId;

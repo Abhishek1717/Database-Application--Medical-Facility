@@ -2,13 +2,13 @@ import java.util.*;
 import java.sql.*;
 
 public class referralStatus {
-	int facilityId = -1;
+	int refFacilityId = -1;
 	int ReferrerId = -1;
 	String reason;
 	Connection conn = null;
-	public referralStatus(Connection con) {
+	public referralStatus(Connection con, int patId, int facId, int empId) {
 		System.out.println("This is the referral status page");
-		
+		this.ReferrerId = empId;
 		this.conn = con;
 	}
 	
@@ -18,9 +18,9 @@ public class referralStatus {
 		while(true)
 		{
 		System.out.println("1. Facility ID");
-		System.out.println("2. Referrer ID");
-		System.out.println("3. Add reason");
-		System.out.println("4. Go Back");
+		//System.out.println("2. Referrer ID");
+		System.out.println("2. Add reason");
+		System.out.println("3. Go Back");
 		
 		
 		///  add to experience table......//////////
@@ -32,24 +32,20 @@ public class referralStatus {
 		
 		case 1:
 		{
+			
 			System.out.println("Enter Facility ID");
-			facilityId=input.nextInt();
+			refFacilityId=input.nextInt();
 			
 			break;
 		}
+		
 		case 2:
-		{   
-			System.out.println("Enter Referrer ID");
-			ReferrerId=input.nextInt();
-			break;
-		}
-		case 3:
 		{   
 			referralReason rr= new referralReason(conn);
 			rr.displayMenu();
 			break;
 		}
-		case 4:
+		case 3:
 		{   
 			System.out.println("Redirecting back to patient Staff patient report");
 			return;

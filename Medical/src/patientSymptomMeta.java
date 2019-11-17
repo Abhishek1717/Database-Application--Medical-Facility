@@ -9,7 +9,7 @@ public class patientSymptomMeta {
 	int duration=0;
 	boolean recurring;
 	String severity="";
-	String incident="";
+	String incident="";	
 	String SymptomCode="";
 		
 	public patientSymptomMeta(Connection con, String SymptomCode) {
