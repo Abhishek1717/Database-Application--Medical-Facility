@@ -23,30 +23,50 @@ public class patientReport {
 		
 		Scanner input = new Scanner(System.in); 
 		int status = 0;
+		String dStatus = "";
+		String treatment = "";
+		int refFac = -1;
+		
 		while(status == 0) {
 		
 			System.out.println("Enter your choice to fill : ");		
 			int choice = input.nextInt();
 			
+			try {
+				Statement stmt = conn.createStatement();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			switch(choice) {
 			
 			case 1:
 			{
 				dischargeStatus ds = new dischargeStatus(conn);
-				String status1 = ds.displayMenu();
-				///////// send this discharge status as sql query
+				dStatus = ds.displayMenu();
+				
+				if(!dStatus.equals("")) {
+					System.out.println("");
+				}
 				break;
 			}
 			case 2:
 			{
-				referralStatus rs = new referralStatus(conn);
-				rs.displayMenu();
+				if(dStatus.equals("Reffered")) {
+					referralStatus rs = new referralStatus(conn);
+					rs.displayMenu();
+					
+				}
+				else {
+					System.out.println("The discharge status is not reffered or has not been given.");
+				}
+				
 				break;
 			}
 			case 3:
 			{
 				System.out.println("enter treatment description");  //SQL statement to update(include a default value) into the treatment_given field of Experience
-				String treatment=input.nextLine();
+				treatment=input.nextLine();
 				
 				// add treatment to table
 				break;
@@ -64,8 +84,17 @@ public class patientReport {
 			}
 			case 6:
 			{	
-				staffPatientReportConfirmation sprc = new staffPatientReportConfirmation(conn,patientId,facilityId);
-				status = sprc.displayMenu();
+				if(((dStatus != "") &&  (treatment != ""))) {
+					
+					//// enter the information into the table experience
+					
+					staffPatientReportConfirmation sprc = new staffPatientReportConfirmation(conn,patientId,facilityId);
+					status = sprc.displayMenu();
+				}
+				else {
+					System.out.println("Please enter valid choice");
+				}
+				
 				break;
 			}
 			default:

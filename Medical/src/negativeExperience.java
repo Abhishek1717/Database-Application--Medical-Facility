@@ -12,7 +12,7 @@ public class negativeExperience {
 	}
 	
 	public void displayMenu() {
-		System.out.println("1. Want to enter Negative Experience");
+		System.out.println("1. Enter the negative experience");
 		
 		System.out.println("2. Go Back");
 		
@@ -32,7 +32,7 @@ public class negativeExperience {
 			System.out.println("Enter Description");
 			Description=input.nextLine();
 			
-			/// add this to experience table...
+			/// add this to experience table...filling exp_code and exp_description
 			return;
 		}
 		case 2:
