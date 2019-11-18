@@ -4,12 +4,17 @@ import java.sql.*;
 public class referralReason {
 	
 	Connection conn = null;
-	String serviceName,Description,Reason;
+	String serviceName,Description;
+	int patientId;
+	int facilityId;
+	int reasonCode;
 	
-	public referralReason(Connection con) {
+	public referralReason(Connection con, int patId, int facId) {
 		System.out.println("This is the referral reason page");
 		
 		this.conn = con;
+		this.patientId = patId;
+		this.facilityId = facId;
 	}
 	
 	public void displayMenu() {
@@ -44,16 +49,30 @@ public class referralReason {
 		}
 		case 3:
 		{   
-			System.out.println(" Enter reason");
-			 Reason=input.nextLine();
-			 i++;
+			System.out.println(" Enter reason (1,2, or 3)");
+			System.out.println(" 1 - service unavailable at time of visit\n"
+					+ " 2 – service not present at facility\n"+""
+							+ "3 - non payment.");
+			 reasonCode = input.nextInt();
+			 
+			 CallableStatement cstmt;
+				try {
+					cstmt = conn.prepareCall("{CALL AddReason(?,?,?,?,?)}");
+					
+					cstmt.setInt(1, reasonCode);
+					cstmt.setString(2, serviceName);
+					cstmt.setString(3, Description);
+					cstmt.setInt(4, patientId);
+			    	cstmt.setInt(5, facilityId);
+			    	cstmt.executeQuery();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			break;
 		}
 		case 4:
 		{   
-			/// call procedure to insert into reasons table.
-			///// using serviceName, Description, reason parameters
-			
 			
 			return;
 		}
