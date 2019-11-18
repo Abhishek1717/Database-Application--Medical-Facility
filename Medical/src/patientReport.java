@@ -1,5 +1,6 @@
 import java.util.*;
 import java.sql.*;
+import java.sql.Date;
 
 public class patientReport {
 	
@@ -77,7 +78,7 @@ public class patientReport {
 			}
 			case 4:
 			{
-				negativeExperience ne = new negativeExperience(conn);
+				negativeExperience ne = new negativeExperience(conn,patientId, facilityId);
 				ne.displayMenu();
 				break;
 			}
@@ -91,9 +92,22 @@ public class patientReport {
 				if(((dStatus != "") &&  (treatment != ""))) {
 					
 					//// enter the information into the table experience
+					CallableStatement cstmt;
+					try {
+						cstmt = conn.prepareCall("{CALL AddExperience(?,?,?,?)}");
+						
+						cstmt.setInt(1, patientId);
+				    	cstmt.setInt(2, facilityId);
+				    	cstmt.setString(3, dStatus);
+				    	cstmt.setString(4, treatment);
+				    	cstmt.executeQuery();
+				    	staffPatientReportConfirmation sprc = new staffPatientReportConfirmation(conn,patientId,facilityId);
+						status = sprc.displayMenu();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
-					staffPatientReportConfirmation sprc = new staffPatientReportConfirmation(conn,patientId,facilityId);
-					status = sprc.displayMenu();
 				}
 				else {
 					System.out.println("Please enter valid choice");
@@ -108,7 +122,6 @@ public class patientReport {
 			}
 		}
 		
-		input.close();
 		
 		return status;
 		

@@ -32,7 +32,7 @@ public class dischargeStatus {
 			
 			case 1:
 			{
-				return "Successful Treatment";
+				return "Successful";
 			}
 			case 2:
 			{
