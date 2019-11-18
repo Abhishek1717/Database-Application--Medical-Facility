@@ -94,7 +94,7 @@ public class addSymptoms {
 		{   
 			
 			
-			String sql ="CALL AddSymptoms(?,?,?)"; 
+			String sql ="CALL AddSymptom(?,?,?)"; 
 	    	CallableStatement cstmt;
 			try {
 				cstmt = conn.prepareCall(sql);

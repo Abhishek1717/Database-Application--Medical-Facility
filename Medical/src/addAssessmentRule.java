@@ -1,5 +1,6 @@
 import java.util.*;
 import java.sql.*;
+import java.sql.Date;
 
 class symVal{
 	public String symCode;
@@ -26,15 +27,18 @@ public class addAssessmentRule {
 		
 		int curId = 0;
 		List<symVal> symvals = new ArrayList<>();
-		Map<Integer, String> symCodes = new HashMap<>();
+		Map<Integer, Integer> symCodes = new HashMap<>();
 		
-		patientCheckIn pci = new patientCheckIn(conn);
+		
 		
 		Statement stmt = conn.createStatement();
-		ResultSet rid = stmt.executeQuery("SELECT MAX(ASSESSMENTID) from ASSESSMENTRULES");
+		ResultSet rid = stmt.executeQuery("SELECT MAX(ASSESSMENTID) as p from ASSESSMENTRULES");
 		while(rid.next()) {
-			curId = rid.getInt("MAX(ID)") + 1;
+			curId = rid.getInt("p") + 1;
 		}
+		if(curId==0)
+			curId+=1;
+		
 		
 		
 		while(true) {
@@ -42,11 +46,11 @@ public class addAssessmentRule {
 		
 		
 		
-		ResultSet rs = stmt.executeQuery("SELECT NAME,SYM_CODE from SYMPTOMS");
+		ResultSet rs = stmt.executeQuery("SELECT NAME,ID from SYMPTOM");
 		int j=0;
 		while(rs.next()) {
 			String sym = rs.getString("NAME");
-			String symcode = rs.getString("SYM_CODE");
+			int symcode = rs.getInt("ID");
 			symCodes.put(j,symcode);
 			j++;
 			System.out.print(j);
@@ -60,20 +64,22 @@ public class addAssessmentRule {
 		System.out.println("Please enter your choice no: ");
 		
 		int choice = input.nextInt();
-	    String Scode=symCodes.get(choice);
+		input.nextLine();
+	   
 	    
 	     if(choice >= 1 && choice < j-1) {
 	    	 
-	    	    
-				ResultSet temp = stmt.executeQuery("SELECT Scale FROM SeverityScale,Symptoms WHERE Symptoms.code = " 
-				+ Scode +"and Symptoms.scaleId= Severityscale.scaleId" );
+	    	 int Scode=symCodes.get(choice);
+				ResultSet temp = stmt.executeQuery("SELECT Scale FROM SeverityScale,Symptom WHERE Symptom.id = " 
+				+ Scode +"and Symptom.scaleId= Severityscale.scaleId" );
+				while(temp.next()){
 				String sName = temp.getString("scale");
 				System.out.println("Select a severity from { "+sName + " }");
-				
+				}
 				//---> should display the appropriate severity scale for user to enter proper value
 
 				String severity=input.nextLine();
-				symvals.add(new symVal(symCodes.get(choice), severity));
+				symvals.add(new symVal("SYM00"+symCodes.get(choice), severity));
 		}
 		
 	     else if(choice == j) {
@@ -96,7 +102,24 @@ public class addAssessmentRule {
 	    				int id = curId;
 	    			    ////STORED PROCEDURE TO SEND THE WHOLE DATA 
 	    				////to the assessment table with the above parameters
-	    				
+	    				String sql ="CALL AddAssessmentRule(?,?,?,?)"; 
+	    		    	CallableStatement cstmt;
+	    				try {
+	    					cstmt = conn.prepareCall(sql);
+	    					
+	    			    	cstmt.setInt(1, curId);
+	    			    	cstmt.setString(2, curSym);
+	    			    	cstmt.setString(3, curVal);
+	    			    	cstmt.setString(4, priority);
+	    			    	
+	    			    	
+	    			    	
+	    			    	cstmt.executeQuery();
+	    			  
+	    			    	} catch (SQLException e) {
+	    					// TODO Auto-generated catch block
+	    					e.printStackTrace();
+	    				}
 	    				
 	    			}
 	    			
@@ -110,8 +133,24 @@ public class addAssessmentRule {
 	    				String curVal = sv.seVal;
 	    				String priority = "Normal";
 	    				int id = curId;
-	    			    ////STORED PROCEDURE TO SEND THE WHOLE DATA 
-	    				////to the assessment table with the above parameters
+	    				String sql ="CALL AddAssessmentRule(?,?,?,?)"; 
+	    		    	CallableStatement cstmt;
+	    				try {
+	    					cstmt = conn.prepareCall(sql);
+	    					
+	    			    	cstmt.setInt(1, curId);
+	    			    	cstmt.setString(2, curSym);
+	    			    	cstmt.setString(3, curVal);
+	    			    	cstmt.setString(4, priority);
+	    			    	
+	    			    	
+	    			    	
+	    			    	cstmt.executeQuery();
+	    			  
+	    			    	} catch (SQLException e) {
+	    					// TODO Auto-generated catch block
+	    					e.printStackTrace();
+	    				}
 	    			}
 	    			return;
 	    		}
@@ -122,8 +161,24 @@ public class addAssessmentRule {
 	    				String curVal = sv.seVal;
 	    				String priority = "Quarantine";
 	    				int id = curId;
-	    			    ////STORED PROCEDURE TO SEND THE WHOLE DATA 
-	    				////to the assessment table with the above parameters
+	    				String sql ="CALL AddAssessmentRule(?,?,?,?)"; 
+	    		    	CallableStatement cstmt;
+	    				try {
+	    					cstmt = conn.prepareCall(sql);
+	    					
+	    			    	cstmt.setInt(1, curId);
+	    			    	cstmt.setString(2, curSym);
+	    			    	cstmt.setString(3, curVal);
+	    			    	cstmt.setString(4, priority);
+	    			    	
+	    			    	
+	    			    	
+	    			    	cstmt.executeQuery();
+	    			  
+	    			    	} catch (SQLException e) {
+	    					// TODO Auto-generated catch block
+	    					e.printStackTrace();
+	    				}
 	    				
 	    				
 	    			}

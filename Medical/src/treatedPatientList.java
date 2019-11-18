@@ -26,11 +26,12 @@ public class treatedPatientList {
 		try {
 			Statement stmt = conn.createStatement();
 			
-			ResultSet rs = stmt.executeQuery("SELECT PatientId From TreatedPatient as tp where tp.FACILITY_ID = " + facilityId);
+			ResultSet rs = stmt.executeQuery("SELECT P.FIRSTNAME as pf, P.LASTNAME as lf ,tp.Patient_Id as p From TreatedPatient tp, Patient P where P.Patient_Id=tp.Patient_Id and tp.FACILITY_ID = " + facilityId);
+			
 			while(rs.next()) {
-				int patId = rs.getInt("PATIENT_ID");
-				ResultSet temp = stmt.executeQuery("select FIRST_NAME, LAST_NAME from PATIENT where PATIENT_ID = " + patId);
-				System.out.println(patId + ". " + temp.getString("LAST_NAME") + ", " + temp.getString("FIRST_NAME") );
+				int patId = rs.getInt("p");
+	
+				System.out.println(patId + ". " + rs.getString("pf") + ", " + rs.getString("lf") );
 				
 			}
 			
@@ -45,13 +46,14 @@ public class treatedPatientList {
 		/////////Do something with this /////////
 		//after staff choose what patient display the below menu
 		
-		System.out.println("1. Checkout");
-		System.out.println("2. Go Back");
 		
-		System.out.println("Enter your choice to fill : ");		
-		int choice = input.nextInt();
 		int status = 5;
 		while(status == 5) {
+			System.out.println("1. Checkout");
+			System.out.println("2. Go Back");
+			
+			System.out.println("Enter your choice to fill : ");		
+			int choice = input.nextInt();
 			switch(choice) {
 			
 			case 1:

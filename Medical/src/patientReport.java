@@ -16,12 +16,7 @@ public class patientReport {
 	}
 	
 	public int displayMenu() {
-		System.out.println("1. Discharge Status");
-		System.out.println("2. Referral Status");
-		System.out.println("3. Treatment");
-		System.out.println("4. Negative Experience");
-		System.out.println(" 5. Go Back");
-		System.out.println("6. Submit");
+		
 		
 		Scanner input = new Scanner(System.in); 
 		int status = 0;
@@ -30,9 +25,15 @@ public class patientReport {
 		int refFac = -1;
 		
 		while(status == 0) {
-		
+			System.out.println("1. Discharge Status");
+			System.out.println("2. Referral Status");
+			System.out.println("3. Treatment");
+			System.out.println("4. Negative Experience");
+			System.out.println(" 5. Go Back");
+			System.out.println("6. Submit");
 			System.out.println("Enter your choice to fill : ");		
 			int choice = input.nextInt();
+			input.nextLine();
 			
 			try {
 				Statement stmt = conn.createStatement();

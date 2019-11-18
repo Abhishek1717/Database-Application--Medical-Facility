@@ -17,10 +17,10 @@ public class patientRouting {
 	
 	    
 	
-			int x = -1; //if no error set it to true and proceed to check in
+			int x =-1; //if no error set it to true and proceed to check in
 			String sql ="CALL Check_LoginSession(?,?,?)"; 
 	    	CallableStatement cstmt;
-			try {
+		    try {
 				cstmt = conn.prepareCall(sql);
 			
 		    	cstmt.setInt(1, patientID);
@@ -32,18 +32,18 @@ public class patientRouting {
 		    	cstmt.executeQuery();
 		    	
 		    	x=cstmt.getInt(3);
-
+              ;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-		
+		   
+				
 		if(x==0) {
 			patientCheckIn pci=new patientCheckIn(conn);
 			try {
 			/// add patient_intial_checkin
-				String sql1 ="CALL Patient_IntialCheckin(?,?)"; 
+				String sql1 ="CALL Patient_InitialCheckin(?,?)"; 
 		    	
 				try {
 					cstmt = conn.prepareCall(sql1);
@@ -60,12 +60,16 @@ public class patientRouting {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				if(x==0)
+				
 				pci.symptomMenu(patientID);
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			
+		}
+		else {
+			System.out.println("multiple login's");
 		}
 	}
 		

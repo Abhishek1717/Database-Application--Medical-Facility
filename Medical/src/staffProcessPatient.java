@@ -24,9 +24,9 @@ public class staffProcessPatient {
 			try {
 				Statement stmt = conn.createStatement();
 				int patId=0;
-				ResultSet rs = stmt.executeQuery("SELECT EmployeeId From Medical_staff where EMPLOYEE_ID = " + empId);
-				
-					patId = rs.getInt("EmployeeId");
+				ResultSet rs = stmt.executeQuery("SELECT Employee_Id From Medical_staff where EMPLOYEE_ID = " + empId);
+				while(rs.next())
+					patId = rs.getInt("Employee_Id");
 					
 				if(patId==0)
 				{   System.out.println("Access only to medical staff");
@@ -42,11 +42,12 @@ public class staffProcessPatient {
 			try {
 				Statement stmt = conn.createStatement();
 				
-				ResultSet rs = stmt.executeQuery("SELECT PATIENT_ID, FIRST_NAME, LAST_NAME from PATIENT, PROCESS, CHECKIN "
-						+ "where CHECKIN.START_TIME != null and CHECKIN.END_TIME = null "
-						+ "and CHECKIN.CHECKINID = PROCESS.CHECKINID and PATIENT.PATIENT_ID = PROCESS.PATIENTID ");
-				while(rs.next()) {
-					System.out.println(rs.getInt("PATIENT_ID") + ". " + rs.getString("LAST_NAME") + ", " + rs.getString("FIRST_NAME"));
+				ResultSet rs1 = stmt.executeQuery("SELECT PATIENT.PATIENT_ID as p, PATIENT.FIRSTNAME as p1, PATIENT.LASTNAME as p2 from PATIENT, PROCESS, CHECKIN,LOG_IN "
+						+ "where CHECKIN.START_TIME is not null and CHECKIN.END_TIME is null "
+						+ "and CHECKIN.CHECKINID = PROCESS.CHECKINID and PATIENT.PATIENT_ID = PROCESS.PATIENT_ID  AND LOG_IN.PATIENT_ID=PATIENT.PATIENT_ID AND LOG_IN.FACILITY_ID="+ facilityId);
+				while(rs1.next()) {
+					
+					System.out.println(rs1.getInt("p") + ". " + rs1.getString("p1") + ", " + rs1.getString("p2"));
 				}
 				///treated patient list.....
 				
@@ -67,7 +68,7 @@ public class staffProcessPatient {
 			System.out.println("3. Go back");
 			System.out.println("Enter your choice : ");
 			int choice = input.nextInt();
-			input.close();
+			
 			switch(choice) {
 			
 			case 1:
@@ -114,7 +115,7 @@ public class staffProcessPatient {
 			}
 			case 3:
 			{    System.out.println("redirecting to home page");
-				break;
+				return;
 			}
 			default:
 			{

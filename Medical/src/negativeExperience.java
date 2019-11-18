@@ -46,7 +46,7 @@ public class negativeExperience {
 		}
 		}
 		
-		input.close();
+		
 	}
 
 }

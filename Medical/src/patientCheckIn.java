@@ -17,11 +17,11 @@ public class patientCheckIn {
 		//should change the function a lot to ensure functionality
 		Statement stmt = conn.createStatement();
 		
-		Map<Integer, String> symCodes = new HashMap<>();
-		ResultSet rs = stmt.executeQuery("SELECT SYM_CODE, NAME from SYMPTOMS");
+		Map<Integer, Integer> symCodes = new HashMap<>();
+		ResultSet rs = stmt.executeQuery("SELECT ID, NAME from SYMPTOM");
 		int i=1;
 		while(rs.next()) {
-			symCodes.put(i, rs.getString("SYM_CODE"));
+			symCodes.put(i, rs.getInt("ID"));
 			String x = rs.getString("NAME");
 			symptoms.add(x);
 			System.out.print(i) ;
@@ -64,10 +64,10 @@ public class patientCheckIn {
 				String sql ="CALL RetrieveBodyPart_Symptom(?,?)"; 
 		    	CallableStatement cstmt;
 				try {
-					
+					String x= "SYM00"+symCodes.get(choice);
 					cstmt = conn.prepareCall(sql);
 					cstmt.registerOutParameter(2, java.sql.Types.VARCHAR);
-					cstmt.setString(1, symCodes.get(choice));
+					cstmt.setString(1, x);
 					
 			    	cstmt.executeQuery();
 			    	bodyPart=cstmt.getString(2);

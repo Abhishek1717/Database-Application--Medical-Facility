@@ -10,9 +10,9 @@ public class patientSymptomMeta {
 	boolean recurring;
 	String severity="";
 	String incident="";	
-	String SymptomCode="";
+	int SymptomCode=0;
 		
-	public patientSymptomMeta(Connection con, String SymptomCode) {
+	public patientSymptomMeta(Connection con, int SymptomCode) {
 		this.conn1 = con;
 		this.SymptomCode=SymptomCode;
 		System.out.println("Please enter the metadata for the symptom");
@@ -22,7 +22,7 @@ public class patientSymptomMeta {
 	public void showAllOptions(Connection conn,String bodyPart, int patientID) throws SQLException {
 		
 		Scanner input = new Scanner(System.in);
-	
+	  System.out.println(bodyPart);
 		
 		  
 		  try {
@@ -63,6 +63,7 @@ public class patientSymptomMeta {
 		
 		System.out.println(" Enter your Duration in days?");
 		this.duration =  input.nextInt();
+		input.nextLine();
 		System.out.println(" Is it a reoccurence? (Y/n)");
 		String option = input.nextLine();
 		this.recurring = (option == "Y" || option == "y")  ? true : false;
@@ -71,11 +72,13 @@ public class patientSymptomMeta {
 		
 		// show the severity scale for this and take the suitable input as suitable
 		try {
-			stmt = conn.createStatement();
-			ResultSet temp = stmt.executeQuery("SELECT Scale FROM SeverityScale,Symptoms WHERE Symptoms.code = " + SymptomCode +"and Symptoms.scaleId= Severityscale.scaleId" );
-			String sName = temp.getString("scale");
+			
+			ResultSet temp = stmt.executeQuery("SELECT SCALE FROM SEVERITYSCALE,SYMPTOM WHERE  SYMPTOM.SCALEID= SEVERITYSCALE.SCALEID and  SYMPTOM.ID = " + SymptomCode );
+			while(temp.next()) {String sName = temp.getString("SCALE");
 			System.out.println("Select a severity from "+sName);
 			severity=input.nextLine();
+			}
+			
 			
 		} catch (SQLException e) {
 			
@@ -88,12 +91,12 @@ public class patientSymptomMeta {
 		this.incident = input.nextLine();
 		
 		//// pass a SQL query along with the values
-		String sql ="CALL Patient_Checkin(?,?,?,?,?,?,?,?)"; 
+		String sql ="CALL Patient_Checkin(?,?,?,?,?,?,?)"; 
     	CallableStatement cstmt;
 		try {
 			cstmt = conn.prepareCall(sql);
-			
-			cstmt.setString(1,SymptomCode);
+			String x="SYM00"+SymptomCode;
+			cstmt.setString(1,x);
 	    	cstmt.setInt(2,duration);
 			cstmt.setInt(3,patientID);
 			cstmt.setString(4,severity);
@@ -105,7 +108,7 @@ public class patientSymptomMeta {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		input.close();
+		
 	}
 	
 

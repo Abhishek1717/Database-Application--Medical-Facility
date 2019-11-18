@@ -141,7 +141,7 @@ public class SignIn {
 					ResultSet rs = stmt.executeQuery("SELECT FACILITY_ID From Works where EMPLOYEE_ID = " + empId );
 					     while(rs.next())
 						 facilityId = rs.getInt("FACILITY_ID");
-					     staffMenu sm= new staffMenu(conn, empId, facilityId);
+					     staffMenu sm= new staffMenu(conn, facilityId, empId);
 					    	sm.displayMenu();
 	
 					

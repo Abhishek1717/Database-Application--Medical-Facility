@@ -48,13 +48,14 @@ public class staffEnterVital {
 		     
 		     try {
 				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery("select MAX(ASSESSMENTID) from ASSESSMENTRULES");
+				ResultSet rs = stmt.executeQuery("select MAX(ASSESSMENTID) as p from ASSESSMENTRULES");
 				int maxId = 1;
 				while(rs.next()) {
-					maxId = rs.getInt("MAX(ID)");
+					maxId = rs.getInt("p");
 				}
 				int checkinId = stmt.executeQuery("select CHECKIN_ID from LOG_IN  where PATIENT_ID = " + patientId + "and FACILITY_ID = " + facilityId ).getInt("CHECKIN_ID");
-				
+				System.out.println(maxId);
+				System.out.println(checkinId);
 				for(int i = 1; i<= maxId; i++) {
 
 					
@@ -100,7 +101,7 @@ public class staffEnterVital {
 
 		     ///////////////////////////////////CHANGE CHANGE CHANGE ////////////////////////////////////////
 
-		     String sql ="CALL AddVitals(?,?,?,?,?,?)"; 
+		     String sql ="CALL AddVitals(?,?,?,?,?)"; 
 		    	CallableStatement cstmt;
 				try {
 					cstmt = conn.prepareCall(sql);
