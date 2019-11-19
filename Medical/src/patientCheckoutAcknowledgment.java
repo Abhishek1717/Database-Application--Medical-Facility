@@ -22,18 +22,28 @@ public class patientCheckoutAcknowledgment {
 		//See the initial pdf for the details, when implementing
 		try {
 			Statement stmt = conn.createStatement();
-			int checkinId = stmt.executeQuery("select CHECKIN_ID from LOG_IN where PATIENT_ID = " + patientId + "FACILITY_ID = " + facilityId ).getInt("CHECKIN_ID");
-			ResultSet rs = stmt.executeQuery("Select EXP_ID, DISCHARGESTATUS, REFERRAL_FACILITY_ID, REFERRER_ID, TREATMENTGIVEN,  EXP_CODE, EXP_DESCRIPTION from EXPERIENCE "
-					+ "where PATIENT_ID = " + patientId + " CHECKINID = " + checkinId );
-			int exp_id = rs.getInt("EXP_ID");
-			int fac_id = rs.getInt("REFERRAL_FACILITY_ID");
-			String disSta = rs.getString("DISCHARGESTATUS");
-			String refID = rs.getString("REFERRER_ID");
-			String tg = rs.getString("TREATMENTGIVEN");
-			String exp_code = rs.getString("EXP_CODE");
-			String exp_de = rs.getString("EXP_DESCRIPTION");
-			System.out.println("1. Discharge Status: " + disSta);
+			int checkinId=0;
+		
+			int exp_id = -1;
+			int fac_id = -1;
+			String disSta = "";
+			String refID = "";
+			String tg = "";
+			String exp_code = "";
+			String exp_de = "";
+			ResultSet rs = stmt.executeQuery("Select E.EXP_ID, E.DISCHARGESTATUS, E.REFERRAL_FACILITY_ID, E.REFERRER_ID, E.TREATMENTGIVEN,  E.EXP_CODE, E.EXP_DESCRIPTION from EXPERIENCE E,Log_in L "
+					+ "where L.PATIENT_ID=" + patientId +" and L.Facility_ID="+  facilityId+ " AND E.PATIENT_ID = " + patientId + " and L.CHECKIN_ID = E.CHECKINID ");
+			while(rs.next()) {
+			 exp_id = rs.getInt("EXP_ID");
+			 fac_id = rs.getInt("REFERRAL_FACILITY_ID");
+			 disSta = rs.getString("DISCHARGESTATUS");
+			 refID = rs.getString("REFERRER_ID");
+			 tg = rs.getString("TREATMENTGIVEN");
+			 exp_code = rs.getString("EXP_CODE");
+			 exp_de = rs.getString("EXP_DESCRIPTION");
 			
+			}
+			System.out.println("1. Discharge Status: " + disSta);
 			if(disSta.equals("Referred")) {
 				ResultSet rq = stmt.executeQuery("Select REASON_CODE, SERVICE_CODE, DESCRIPTION from REASONS where EXP_ID = " + exp_id);
 				System.out.println(" Referral Status:");
@@ -60,7 +70,8 @@ public class patientCheckoutAcknowledgment {
 					String service = rq.getString("SERVICE_CODE");
 					if(service != null) {
 						ResultSet rt = stmt.executeQuery("Select SERVICE_NAME from SERVICES where SERVICE_CODE = " + service);
-						System.out.println("Name of Service : " + rt.getString("SERVICE_NAME"));
+						while(rt.next())
+							System.out.println("Name of Service : " + rt.getString("SERVICE_NAME"));
 					}
 					else {
 						System.out.println("Name of Service : Other");
@@ -71,7 +82,7 @@ public class patientCheckoutAcknowledgment {
 			}
 				
 				System.out.println("Treatement given: " + tg);
-				
+				if(exp_code!= null) {
 				if(exp_code.equals("1")) {
 					System.out.println("Negative Experience: Misdiagnosis ");
 					
@@ -80,7 +91,8 @@ public class patientCheckoutAcknowledgment {
 					System.out.println("Negative Experience: Patient acquired infection during hospital stay");
 				}
 				System.out.println("Negative Experience Description: " + exp_de);
-				
+			}
+			
 			
 			
 		} catch (SQLException e1) {
