@@ -2,7 +2,7 @@ import java.util.*;
 import java.sql.*;
 
 public class negativeExperience {
-	int NegativeCode;
+	String NegativeCode;
 	String Description;
 	int facilityId;
 	int patientId;
@@ -16,7 +16,9 @@ public class negativeExperience {
 		this.facilityId = facId;
 	}
 	
-	public void displayMenu() {
+	public List<String> displayMenu() {
+		
+		List<String> negs = new ArrayList<>(2);
 		System.out.println("1. Enter the negative experience");
 		
 		System.out.println("2. Go Back");
@@ -25,40 +27,32 @@ public class negativeExperience {
 		
 		System.out.println("Enter your choice to fill : ");		
 		int choice = input.nextInt();
+		input.nextLine();
 		
 		switch(choice) {
 		
 		
 		case 1:
 		{    
-			System.out.println("Enter 1 for Misdiagnosis");
-			System.out.println(" Enter 2 for Patient acquired infection during hospital stay.");
-			NegativeCode=input.nextInt();
-			input.nextLine();
+			
+			System.out.println("Enter 1 for Misdiagnosis.\n "
+					+ "Enter 2 for Patient acquired infection.");
+			
+			NegativeCode = input.nextLine();
+			
 			System.out.println("Enter Description");
 			Description=input.nextLine();
-			
+			negs.add(NegativeCode);
+			negs.add(Description);
 			/// add this to experience table...filling exp_code and exp_description
-			CallableStatement cstmt;
-			try {
-				cstmt = conn.prepareCall("{CALL AddReason(?,?,?,?,?)}");
-				
-				cstmt.setInt(1, patientId);
-		    	cstmt.setInt(2, facilityId);
-		    	cstmt.setInt(3, NegativeCode);
-		    	cstmt.setString(4, Description);
-		    	cstmt.executeQuery();
-		    	
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return;
+			return negs;
 		}
 		case 2:
 		{
+			negs.add(null);
+			negs.add(null);
 			System.out.println("Redirecting back to patient Staff patient report");
-			return;
+			return negs;
 		}
 		default:
 		{
@@ -66,7 +60,9 @@ public class negativeExperience {
 		}
 		}
 		
-		
+		negs.add(null);
+		negs.add(null);
+		return negs;
 	}
 
 }
