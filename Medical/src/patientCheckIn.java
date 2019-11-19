@@ -29,9 +29,6 @@ public class patientCheckIn {
 			i++;	
 		}
 		
-		System.out.print(i++);
-		System.out.println(". Other");
-		
 		System.out.print(i);
 		System.out.println(". Done");
 		Scanner input = new Scanner(System.in);
@@ -41,7 +38,7 @@ public class patientCheckIn {
 			
 			int choice = input.nextInt();
 			
-			if (choice == symptoms.size() + 2) {
+			if (choice == symptoms.size() + 1) {
 				////  /// rcall procedure checkin.patient_intialcheckin
 				///// check this
 				firstExample.main(null);

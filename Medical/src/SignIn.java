@@ -54,7 +54,7 @@ public class SignIn {
 			
 		
 			
-			System.out.println("B.Last Name");
+			System.out.println("B.Last Name (Full Name if you are not a patient)");
 			this.lastName = input.nextLine();
 			
 			System.out.println("C.Date of Birth(yyyy-mm-dd");
